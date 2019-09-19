@@ -1,0 +1,18 @@
+﻿@model ClientModel
+@{
+    Layout = "_Layout";
+}
+<h1>Add Client</h1>
+
+<form asp-controller="Client" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="ClientId" /><br />
+    <span asp-validation-for="ClientId"></span><br />
+    <input asp-for="ClientSecret" /><br />
+    <span asp-validation-for="ClientSecret"></span><br />
+    <input asp-for="RedirectUrl" /><br />
+    <span asp-validation-for="RedirectUrl"></span><br />
+    <input type="submit" asp-action="Add" value="Submit" />
+    <input type="submit" asp-action="Cancel" value="Cancel" />
+    <div>@Model?.Error</div>
+</form>

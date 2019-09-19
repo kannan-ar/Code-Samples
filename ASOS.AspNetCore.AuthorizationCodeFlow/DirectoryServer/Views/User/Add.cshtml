@@ -1,0 +1,15 @@
+﻿@model UserModel
+
+<h1>Add User</h1>
+<form asp-controller="User" asp-action="Add">
+    @Html.AntiForgeryToken()
+    @Html.DropDownListFor(u => u.ClientId, new SelectList(Model.Clients, "ClientId", "ClientId"))<br />
+    <span asp-validation-for="ClientId"></span><br />
+    <input asp-for="UserName" /><br />
+    <span asp-validation-for="UserName"></span><br />
+    <input asp-for="Password" /><br />
+    <span asp-validation-for="Password"></span><br />
+    <input type="submit" asp-action="Add" value="Submit" />
+    <input type="submit" asp-action="Cancel" value="Cancel" />
+    <div>@Model?.Error</div>
+</form>

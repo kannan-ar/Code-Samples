@@ -1,0 +1,12 @@
+﻿<form enctype="application/x-www-form-urlencoded" method="post">
+    @Html.AntiForgeryToken()
+
+    @foreach (var parameter in Model.GetParameters())
+    {
+        <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+    }
+    <input type="text" name="username" /><br /><br />
+    <input type="password" name="pwd" /><br /><br />
+    <input asp-action="Accept" name="submit.Accept" type="submit" value="Login" />
+    <input name="submit.Deny" type="submit" value="Cancel" />
+</form>

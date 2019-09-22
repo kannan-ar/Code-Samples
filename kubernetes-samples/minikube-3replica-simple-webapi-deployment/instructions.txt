@@ -1,0 +1,12 @@
+Deployment:
+kubectl create -f deployment.yaml
+
+Check Status:
+kubectl get deployments
+kubectl get pods
+
+Create Service as NodePort:
+kubectl expose deployment simplecore --type=NodePort
+
+Get URL of service:
+minikube service simplecore --url

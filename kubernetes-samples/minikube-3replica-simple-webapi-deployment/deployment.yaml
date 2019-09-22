@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplecore
+  labels:
+    app: simplecore
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simplecore
+  template:
+    metadata:
+      labels:
+        app: simplecore
+    spec:
+      containers:
+      - name: simplecore
+        image: kannanar/dev:latest
+        ports:
+        - containerPort: 80

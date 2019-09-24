@@ -5,7 +5,7 @@ kubectl apply -f hello-service.yaml
 kubectl apply -f frontend.yaml
 
 #get url of the load balancer
-kubectl get service frontend --url
+kubectl get service frontend --watch
 
 #execute this for load balancer to generate the external ip
 minikube tunnel

@@ -1,0 +1,13 @@
+minikube start
+
+kubectl apply -f hello.yaml
+kubectl apply -f hello-service.yaml
+kubectl apply -f frontend.yaml
+
+#get url of the load balancer
+kubectl get service frontend --url
+
+#execute this for load balancer to generate the external ip
+minikube tunnel
+
+url - http://expternal-ip

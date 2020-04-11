@@ -9,6 +9,7 @@ js/
 .vs
 packages
 wwwroot
+dist
 .vscode/*
 
 # Compiled source #

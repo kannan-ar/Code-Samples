@@ -1,0 +1,13 @@
+$bgcolor: green;
+$hdcolor: red;
+$hdfontsize: 14px;
+
+body {
+    background-color: $bgcolor
+}
+
+.heading {
+    color: $hdcolor;
+    font-size: $hdfontsize;
+    text-align: center;
+}

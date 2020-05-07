@@ -1,7 +1,5 @@
 import React from 'react';
 
-const UserContext = React.createContext();
-
 const {Provider: Provider, Consumer: UserConsumer} = React.createContext();
 
 class UserProvider extends React.Component

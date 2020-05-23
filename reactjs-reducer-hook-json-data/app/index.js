@@ -12,10 +12,6 @@ const products = [
     }
 ]
 
-axios.get(`http://localhost:3000/products`).then(resp => {
-    console.log(resp.data);
-});
-
 const App = () => <ProductList products={products} />
 
 ReactDOM.render(<App />, document.getElementById('app'))

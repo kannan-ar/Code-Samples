@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {config} from '../config'
 
 export const GET_PRODUCTS = "GET PRODUCTS"
 export const GET_PRODUCTS_SUCCESS = "GET PRODUCTS SUCCESS"
@@ -18,13 +17,12 @@ export const getProductsFailure = () => ({
     type: GET_PRODUCTS_FAILURE
 })
 
-export const fetchProducts = () => {
+export const fetchProducts = (url) => {
     return async dispatch => {
         dispatch(getProducts())
 
         try {
-            const configData = await config()
-            const data = await axios(configData.serverUrl).then(resp => resp.data)
+            const data = await axios(url).then(resp => resp.data)
             dispatch(getProductsSuccess(data))
         }
         catch(error) {

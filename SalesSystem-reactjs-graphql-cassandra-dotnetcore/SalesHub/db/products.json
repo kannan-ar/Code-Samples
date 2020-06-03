@@ -1,0 +1,901 @@
+[
+    {
+        "id": 1,
+        "name": "Laptop",
+        "price": 50000,
+        "categories": ["Computer", "Technology"]
+    },
+    {
+        "id": 2,
+        "name": "Mobile phone",
+        "price": 15000,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 3,
+        "name": "Lilly",
+        "price": 250,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 4,
+        "name": "Kalanjo",
+        "price": 100,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 5,
+        "name": "Omlet",
+        "price": 25,
+        "categories": ["Food"]
+    },
+    {
+        "id": 6,
+        "name": "Pizza",
+        "price": 500,
+        "categories": ["Food"]
+    },
+    {
+        "id": 7,
+        "name": "Shavarma",
+        "price": 150,
+        "categories": ["Food"]
+    },
+    {
+        "id": 8,
+        "name": "Grilled Chicken",
+        "price": 350,
+        "categories": ["Food"]
+    },
+    {
+        "id": 9,
+        "name": "Peanut",
+        "price": 15,
+        "categories": ["Food"]
+    },
+    {
+        "id": 10,
+        "name": "Mango Plant",
+        "price": 75,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 11,
+        "name": "Jackfruit Tree",
+        "price": 200,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 12,
+        "name": "Ceaser 3",
+        "price": 100,
+        "categories": ["Gaming"]
+    },
+    {
+        "id": 13,
+        "name": "Age of Empire",
+        "price": 1000,
+        "categories": ["Gaming"]
+    },
+    {
+        "id": 14,
+        "name": "Pubg",
+        "price": 2000,
+        "categories": ["Gaming"]
+    },
+    {
+        "id": 15,
+        "name": "Guruvayoorappan Songs",
+        "price": 45,
+        "categories": ["Religion"]
+    },
+    {
+        "id": 16,
+        "name": "Vanamala Books",
+        "price": 60,
+        "categories": ["Religion", "Reading"]
+    },
+    {
+        "id": 17,
+        "name": "Maghabharatha Books",
+        "price": 3000,
+        "categories": ["Religion", "Reading"]
+    },
+    {
+        "id": 18,
+        "name": "Ramayana Books",
+        "price": 2500,
+        "categories": ["Religion", "Reading"]
+    },
+    {
+        "id": 19,
+        "name": "Gita",
+        "price": 1500,
+        "categories": ["Religion", "Reading"]
+    },
+    {
+        "id": 20,
+        "name": "Sari",
+        "price": 500,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 21,
+        "name": "Kurtha",
+        "price": 400,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 22,
+        "name": "Churidar",
+        "price": 600,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 23,
+        "name": "Shirt",
+        "price": 700,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 24,
+        "name": "Pant",
+        "price": 1000,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 25,
+        "name": "Towel",
+        "price": 500,
+        "categories": ["Fashion"]
+    },
+    {
+        "id": 26,
+        "name": "Gas Stove",
+        "price": 5000,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 27,
+        "name": "Tupperware",
+        "price": 250,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 28,
+        "name": "Induction Stove",
+        "price": 4000,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 29,
+        "name": "Oven",
+        "price": 7000,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 30,
+        "name": "Spoon",
+        "price": 50,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 31,
+        "name": "Plates",
+        "price": 400,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 32,
+        "name": "Enamal ware",
+        "price": 900,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 33,
+        "name": "Gas Lighter",
+        "price": 100,
+        "categories": ["Cooking"]
+    },
+    {
+        "id": 34,
+        "name": "Washing Machine",
+        "price": 50000,
+        "categories": ["Home"]
+    },
+    {
+        "id": 35,
+        "name": "Grinder",
+        "price": 10000,
+        "categories": ["Home"]
+    },
+    {
+        "id": 36,
+        "name": "Fridge",
+        "price": 45000,
+        "categories": ["Home"]
+    },
+    {
+        "id": 37,
+        "name": "Table Lamp",
+        "price": 1700,
+        "categories": ["Home"]
+    },
+    {
+        "id": 38,
+        "name": "Mixi",
+        "price": 1500,
+        "categories": ["Home"]
+    },
+    {
+        "id": 39,
+        "name": "Fan",
+        "price": 1800,
+        "categories": ["Home"]
+    },
+    {
+        "id": 40,
+        "name": "Tent",
+        "price": 6000,
+        "categories": ["Travel"]
+    },
+    {
+        "id": 41,
+        "name": "Travel Bag",
+        "price": 5400,
+        "categories": ["Travel"]
+    },
+    {
+        "id": 42,
+        "name": "Sleeping Bag",
+        "price": 2800,
+        "categories": ["Travel"]
+    },
+    {
+        "id": 43,
+        "name": "Solar Panel",
+        "price": 2000,
+        "categories": ["Travel"]
+    },
+    {
+        "id": 44,
+        "name": "Hiking Shoe",
+        "price": 1500,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 45,
+        "name": "Hiking Rope",
+        "price": 1200,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 46,
+        "name": "Travel Light",
+        "price": 800,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 47,
+        "name": "Rain Coat",
+        "price": 750,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 48,
+        "name": "Avacado Plant",
+        "price": 280,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 49,
+        "name": "Rambootan Plant",
+        "price": 120,
+        "categories": ["Gardening"]
+    },
+    {
+        "id": 50,
+        "name": "Mouse",
+        "price": 135,
+        "categories": ["Computer"]
+    },
+    {
+        "id": 51,
+        "name": "Keyboard",
+        "price": 200,
+        "categories": ["Computer"]
+    },
+    {
+        "id": 52,
+        "name": "Wifi Router",
+        "price": 350,
+        "categories": ["Computer"]
+    },
+    {
+        "id": 53,
+        "name": "USB Drive",
+        "price": 550,
+        "categories": ["Computer"]
+    },
+    {
+        "id": 54,
+        "name": "External Harddisk",
+        "price": 5400,
+        "categories": ["Computer"]
+    },
+    {
+        "id": 55,
+        "name": "USB Cable",
+        "price": 65,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 56,
+        "name": "Mobile Charger",
+        "price": 80,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 57,
+        "name": "Mobile Holder",
+        "price": 350,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 58,
+        "name": "Digital Watch",
+        "price": 4900,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 59,
+        "name": "Calculator",
+        "price": 600,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 60,
+        "name": "Invertor",
+        "price": 7000,
+        "categories": ["Technology"]
+    },
+    {
+        "id": 61,
+        "name": "Movie Display",
+        "price": 8000,
+        "categories": ["Movies"]
+    },
+    {
+        "id": 62,
+        "name": "Projector",
+        "price": 15000,
+        "categories": ["Movies"]
+    },
+    {
+        "id": 63,
+        "name": "Home Theater",
+        "price": 55000,
+        "categories": ["Movies"]
+    },
+    {
+        "id": 64,
+        "name": "Doulby Sound System",
+        "price": 22000,
+        "categories": ["Movies"]
+    },
+    {
+        "id": 65,
+        "name": "Online Tickets",
+        "price": 500,
+        "categories": ["Movies"]
+    },
+    {
+        "id": 66,
+        "name": "Dracula",
+        "price": 250,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 67,
+        "name": "Bible",
+        "price": 850,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 68,
+        "name": "Harry Potter books",
+        "price": 850,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 69,
+        "name": "Tolstoy stories",
+        "price": 1000,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 70,
+        "name": "Mopposang stories",
+        "price": 450,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 71,
+        "name": "Shakspire Collections",
+        "price": 1150,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 72,
+        "name": "Fairy Stories",
+        "price": 150,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 73,
+        "name": "Willworth stories",
+        "price": 540,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 74,
+        "name": "Horror Stories",
+        "price": 1450,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 75,
+        "name": "World Classics",
+        "price": 890,
+        "categories": ["Reading"]
+    },
+    {
+        "id": 76,
+        "name": "Paracetmol",
+        "price": 10,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 77,
+        "name": "Deoxyrange",
+        "price": 400,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 78,
+        "name": "Metxel",
+        "price": 170,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 79,
+        "name": "Aspirine",
+        "price": 80,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 80,
+        "name": "Glycosine",
+        "price": 95,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 81,
+        "name": "Fluticone",
+        "price": 350,
+        "categories": ["Medicine"]
+    },
+    {
+        "id": 82,
+        "name": "Termometer",
+        "price": 640,
+        "categories": ["Business"]
+    },
+    {
+        "id": 83,
+        "name": "Machine Cutter",
+        "price": 3500,
+        "categories": ["Business"]
+    },
+    {
+        "id": 84,
+        "name": "Fish Tank",
+        "price": 6700,
+        "categories": ["Business"]
+    },
+    {
+        "id": 85,
+        "name": "Power Tools",
+        "price": 8500,
+        "categories": ["Business"]
+    },
+    {
+        "id": 86,
+        "name": "Carbone Filler",
+        "price": 2700,
+        "categories": ["Business"]
+    },
+    {
+        "id": 87,
+        "name": "Office Chair",
+        "price": 4000,
+        "categories": ["Business"]
+    },
+    {
+        "id": 88,
+        "name": "Office Table",
+        "price": 7300,
+        "categories": ["Business"]
+    },
+    {
+        "id": 89,
+        "name": "Roof Sheets",
+        "price": 10000,
+        "categories": ["Business"]
+    },
+    {
+        "id": 90,
+        "name": "Welding Machine",
+        "price": 12000,
+        "categories": ["Business"]
+    },
+    {
+        "id": 91,
+        "name": "Canon Camera",
+        "price": 25000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 92,
+        "name": "SLR Camera",
+        "price": 30000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 93,
+        "name": "Tripods",
+        "price": 15000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 94,
+        "name": "Monopods",
+        "price": 10000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 95,
+        "name": "Camera Batteries",
+        "price": 5000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 96,
+        "name": "Camera Battery Chargers",
+        "price": 4000,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 97,
+        "name": "Screen Protectors",
+        "price": 1550,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 98,
+        "name": "Camera Bags",
+        "price": 2800,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 99,
+        "name": "Camera Filters",
+        "price": 3900,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 100,
+        "name": "Infrared Camera",
+        "price": 4600,
+        "categories": ["Photography"]
+    },
+    {
+        "id": 101,
+        "name": "Hiking Boots",
+        "price": 3000,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 102,
+        "name": "Hiking Stick",
+        "price": 1300,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 103,
+        "name": "Camping Table",
+        "price": 2500,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 104,
+        "name": "Hiking Shorts",
+        "price": 700,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 105,
+        "name": "Hiking Pants",
+        "price": 1700,
+        "categories": ["Hiking"]
+    },
+    {
+        "id": 106,
+        "name": "Car Seat Cover",
+        "price": 8000,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 107,
+        "name": "Car Charger",
+        "price": 480,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 108,
+        "name": "Air freshener",
+        "price": 160,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 109,
+        "name": "Car safety hammer",
+        "price": 850,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 110,
+        "name": "Jumper Cables",
+        "price": 950,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 111,
+        "name": "Spare Tire",
+        "price": 4000,
+        "categories": ["Driving"]
+    },
+    {
+        "id": 112,
+        "name": "Office Table",
+        "price": 13500,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 113,
+        "name": "Beds",
+        "price": 5000,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 114,
+        "name": "Sofas",
+        "price": 35000,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 115,
+        "name": "Mattresses",
+        "price": 8000,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 116,
+        "name": "Dining Sets",
+        "price": 12000,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 117,
+        "name": "Wardrobe",
+        "price": 9000
+    },
+    {
+        "id": 118,
+        "name": "Cabinets",
+        "price": 13000,
+        "categories": ["Furniture"]
+    },
+    {
+        "id": 119,
+        "name": "Paintings",
+        "price": 7000,
+        "categories": ["Collectibles"]
+    },
+    {
+        "id": 120,
+        "name": "Prints",
+        "price": 3500,
+        "categories": ["Collectibles"]
+    },
+    {
+        "id": 121,
+        "name": "Drawings",
+        "price": 4600,
+        "categories": ["Collectibles"]
+    },
+    {
+        "id": 122,
+        "name": "Stamps",
+        "price": 500,
+        "categories": ["Collectibles"]
+    },
+    {
+        "id": 123,
+        "name": "Antiques",
+        "price": 30000,
+        "categories": ["Collectibles"]
+    },
+    {
+        "id": 124,
+        "name": "Cricket Bat",
+        "price": 5000,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 125,
+        "name": "Cricket Glove",
+        "price": 3000,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 126,
+        "name": "Batminton Rak",
+        "price": 3000,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 127,
+        "name": "Shuttle Cok",
+        "price": 150,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 128,
+        "name": "Carrom board",
+        "price": 2000,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 129,
+        "name": "Billiards",
+        "price": 15000,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 130,
+        "name": "Tennis Bat",
+        "price": 5500,
+        "categories": ["Sports"]
+    },
+    {
+        "id": 131,
+        "name": "Cat Food",
+        "price": 199,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 132,
+        "name": "Dog Food",
+        "price": 400,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 133,
+        "name": "Dog Belt",
+        "price": 600,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 134,
+        "name": "Dog Cage",
+        "price": 8500,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 135,
+        "name": "Food Tray",
+        "price": 900,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 136,
+        "name": "Pet Toys",
+        "price": 1000,
+        "categories": ["Pets"]
+    },
+    {
+        "id": 137,
+        "name": "Casio Watches",
+        "price": 16000,
+        "categories": ["Watches"]
+    },
+    {
+        "id": 138,
+        "name": "Timex",
+        "price": 5000,
+        "categories": ["Watches"]
+    },
+    {
+        "id": 139,
+        "name": "Titan",
+        "price": 6000,
+        "categories": ["Watches"]
+    },
+    {
+        "id": 140,
+        "name": "Fossil",
+        "price": 25000,
+        "categories": ["Watches"]
+    },
+    {
+        "id": 141,
+        "name": "Dried Fruits",
+        "price": 800,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 142,
+        "name": "Rice",
+        "price": 250,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 143,
+        "name": "Cooking Oil",
+        "price": 200,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 144,
+        "name": "Chocolate",
+        "price": 450,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 145,
+        "name": "Noodles",
+        "price": 100,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 146,
+        "name": "Tea Bags",
+        "price": 400,
+        "categories": ["Grocery"]
+    },
+    {
+        "id": 147,
+        "name": "TV",
+        "price": 15000,
+        "categories": ["Electronics"]
+    },
+    {
+        "id": 148,
+        "name": "Radio",
+        "price": 2000,
+        "categories": ["Electronics"]
+    },
+    {
+        "id": 149,
+        "name": "Tablets",
+        "price": 4000,
+        "categories": ["Electronics"]
+    },
+    {
+        "id": 150,
+        "name": "Memory Cards",
+        "price": 300,
+        "categories": ["Electronics"]
+    }
+]

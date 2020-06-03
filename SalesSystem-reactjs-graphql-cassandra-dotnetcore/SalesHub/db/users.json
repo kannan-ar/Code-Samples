@@ -1,0 +1,132 @@
+[
+    {
+        "id": 1,
+        "name": "Kannan Ramachandran",
+        "interests": ["Computer", "Travel", "Gardening", "Pets", "Watches"]
+    },
+    {
+        "id": 2,
+        "name": "Minu Stephen",
+        "interests": ["Gardening", "Travel", "Furniture"]
+    },
+    {
+        "id": 3,
+        "name": "Daisy Johnson",
+        "interests": ["Movies", "Fashion", "Religion", "Home"]
+    },
+    {
+        "id": 4,
+        "name": "Sini Kannan",
+        "interests": ["Travel", "Cooking", "Home", "Furniture"]
+    },
+    {
+        "id": 5,
+        "name": "Girish Krishnan",
+        "interests": ["Fashion", "Travel", "Sports", "Grocery"]
+    },
+    {
+        "id": 5,
+        "name": "Saji Thumbassery",
+        "interests": ["Home", "Food", "Watches", "Grocery"]
+    },
+    {
+        "id": 6,
+        "name": "Harish Vallomkuzhiyil",
+        "interests": ["Reading", "Driving", "Grocery"]
+    },
+    {
+        "id": 7,
+        "name": "Radha Krishnan",
+        "interests": ["Internet", "Food", "Sports"]
+    },
+    {
+        "id": 8,
+        "name": "Anish Krishnan",
+        "interests": ["Hiking", "Photography", "Food"]
+    },
+    {
+        "id": 9,
+        "name": "Pramod Raghavan",
+        "interests": ["Technology", "Movies", "Sports", "Pets"]
+    },
+    {
+        "id": 10,
+        "name": "Arun Raaj",
+        "interests": ["Movies", "Furniture", "Pets"]
+    },
+    {
+        "id": 11,
+        "name": "Rahul Ramachandran",
+        "interests": ["Photography", "Travel", "Sports", "Watches"]
+    },
+    {
+        "id": 12,
+        "name": "Laiju Bhaskaran",
+        "interests": ["Food", "Technology", "Internet", "Electronics"]
+    },
+    {
+        "id": 13,
+        "name": "Rajin Kumar",
+        "interests": ["Travel", "Photography", "Collectibles"]
+    },
+    {
+        "id": 14,
+        "name": "Dileep Kumar",
+        "interests": ["Internet", "Reading", "Watches"]
+    },
+    {
+        "id": 15,
+        "name": "Arjun Jayaprakash",
+        "interests": ["Medicine", "Movies", "Sports"]
+    },
+    {
+        "id": 16,
+        "name": "Harikrishnan",
+        "interests": ["Food", "Movies", "Sports"]
+    },
+    {
+        "id": 17,
+        "name": "Suresh Kumar",
+        "interests": ["Smoking", "Movies", "Pets"]
+    },
+    {
+        "id": 18,
+        "name": "Jayaraj Ramachandran",
+        "interests": ["Business", "Religion", "Grocery"]
+    },
+    {
+        "id": 19,
+        "name": "Vimala Devi",
+        "interests": ["Religion", "Furniture"]
+    },
+    {
+        "id": 20,
+        "name": "Jaya Shankar",
+        "interests": ["Gaming", "Collectibles", "Electronics"]
+    },
+    {
+        "id": 21,
+        "name": "Anu Viswan",
+        "interests": ["Technology", "Computer", "Collectibles", "Electronics"]
+    },
+    {
+        "id": 22,
+        "name": "Sobish Joseph",
+        "interests": ["Food", "Travel", "Grocery", "Electronics"]
+    },
+    {
+        "id": 23,
+        "name": "Sindhu Harish",
+        "interests": ["Home", "Furniture", "Collectibles"]
+    },
+    {
+        "id": 24,
+        "name": "Subha Dileep",
+        "interests": ["Fashion", "Photography", "Collectibles"]
+    },
+    {
+        "id": 25,
+        "name": "Renjith Bhaskaran",
+        "interests": ["Business", "Religion", "Electronics"]
+    }
+]

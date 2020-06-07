@@ -32,7 +32,7 @@ namespace SalesSimulator.Services
 
         public IEnumerable<User> GetActiveUsersFromCollection(IList<User> users)
         {
-            var activeCount = random.Next(0, users.Count-1);
+            var activeCount = random.Next(1, users.Count);
 
             for(int i = 0; activeCount> i; i++)
             {
@@ -47,7 +47,7 @@ namespace SalesSimulator.Services
                 yield break;
             }
 
-            var currentCount = random.Next(0, user.Interests.Length - 1);
+            var currentCount = random.Next(1, user.Interests.Length);
 
             for(int i = 0; currentCount> i; i++)
             {

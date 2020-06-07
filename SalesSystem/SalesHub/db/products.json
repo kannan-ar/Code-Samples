@@ -698,7 +698,8 @@
     {
         "id": 117,
         "name": "Wardrobe",
-        "price": 9000
+        "price": 9000,
+        "categories": ["Furniture"]
     },
     {
         "id": 118,

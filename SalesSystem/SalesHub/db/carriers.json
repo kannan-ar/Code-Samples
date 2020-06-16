@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Fedex",
+        "description": "Fedex is a carrier from U.S"
+    },
+    {
+        "name": "Postal India",
+        "description": "Govement of India undertaking"
+    },
+    {
+        "name": "Bluedart",
+        "description": "Bluedart operates worldwide"
+    },
+    {
+        "name": "Fast Logistics",
+        "description": "A local provider"
+    }
+]

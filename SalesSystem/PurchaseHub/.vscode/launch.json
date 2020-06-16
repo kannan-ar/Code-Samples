@@ -9,13 +9,13 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/PurchaseHub/bin/Debug/netcoreapp3.1/PurchaseHub.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/PurchaseHub.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
@@ -23,17 +23,6 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
-        },
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/SalesSimulator/bin/Debug/netcoreapp3.1/SalesSimulator.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/SalesSimulator",
-            "console": "internalConsole",
-            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",

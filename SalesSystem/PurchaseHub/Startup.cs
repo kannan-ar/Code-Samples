@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PurchaseHub.Services;
+using PurchaseHub.Services.Implementations;
 
 namespace PurchaseHub
 {
@@ -25,6 +27,15 @@ namespace PurchaseHub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSingleton<IDatabase>(
+                new Database(Configuration["DbConnection:Server"], Configuration["DbConnection:KeySpace"])
+            );
+            services.AddSingleton<IDbQuery, DbQuery>();
+            services.AddSingleton<ISalesQuery, SalesQuery>();
+            services.AddHostedService<DatabaseHostedService>();
+
             services.AddControllers();
         }
 
@@ -36,11 +47,13 @@ namespace PurchaseHub
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseHMACHashing();
 
             app.UseEndpoints(endpoints =>
             {

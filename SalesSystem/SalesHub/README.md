@@ -1,4 +1,4 @@
-node app.js
+nodemon app.js
 
 #http://localhost:3000/products
 #http://localhost:3000/users

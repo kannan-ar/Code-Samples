@@ -1,900 +1,1050 @@
 [
     {
         "id": 1,
+        "seller": "Acon",
         "name": "Laptop",
         "price": 50000,
         "categories": ["Computer", "Technology"]
     },
     {
         "id": 2,
+        "seller": "Micro Mob",
         "name": "Mobile phone",
         "price": 15000,
         "categories": ["Technology"]
     },
     {
         "id": 3,
+        "seller": "Black Lab",
         "name": "Lilly",
         "price": 250,
         "categories": ["Gardening"]
     },
     {
         "id": 4,
+        "seller": "Smart Pace",
         "name": "Kalanjo",
         "price": 100,
         "categories": ["Gardening"]
     },
     {
         "id": 5,
+        "seller": "Black Lab",
         "name": "Omlet",
         "price": 25,
         "categories": ["Food"]
     },
     {
         "id": 6,
+        "seller": "Micro Mob",
         "name": "Pizza",
         "price": 500,
         "categories": ["Food"]
     },
     {
         "id": 7,
+        "seller": "Acon",
         "name": "Shavarma",
         "price": 150,
         "categories": ["Food"]
     },
     {
         "id": 8,
+        "seller": "Black Lab",
         "name": "Grilled Chicken",
         "price": 350,
         "categories": ["Food"]
     },
     {
         "id": 9,
+        "seller": "Smart Pace",
         "name": "Peanut",
         "price": 15,
         "categories": ["Food"]
     },
     {
         "id": 10,
+        "seller": "Micro Mob",
         "name": "Mango Plant",
         "price": 75,
         "categories": ["Gardening"]
     },
     {
         "id": 11,
+        "seller": "Digital Inc",
         "name": "Jackfruit Tree",
         "price": 200,
         "categories": ["Gardening"]
     },
     {
         "id": 12,
+        "seller": "Digital Inc",
         "name": "Ceaser 3",
         "price": 100,
         "categories": ["Gaming"]
     },
     {
         "id": 13,
+        "seller": "Acon",
         "name": "Age of Empire",
         "price": 1000,
         "categories": ["Gaming"]
     },
     {
         "id": 14,
+        "seller": "Black Lab",
         "name": "Pubg",
         "price": 2000,
         "categories": ["Gaming"]
     },
     {
         "id": 15,
+        "seller": "Smart Pace",
         "name": "Guruvayoorappan Songs",
         "price": 45,
         "categories": ["Religion"]
     },
     {
         "id": 16,
+        "seller": "Micro Mob",
         "name": "Vanamala Books",
         "price": 60,
         "categories": ["Religion", "Reading"]
     },
     {
         "id": 17,
+        "seller": "Acon",
         "name": "Maghabharatha Books",
         "price": 3000,
         "categories": ["Religion", "Reading"]
     },
     {
         "id": 18,
+        "seller": "Digital Inc",
         "name": "Ramayana Books",
         "price": 2500,
         "categories": ["Religion", "Reading"]
     },
     {
         "id": 19,
+        "seller": "Smart Pace",
         "name": "Gita",
         "price": 1500,
         "categories": ["Religion", "Reading"]
     },
     {
         "id": 20,
+        "seller": "Acon",
         "name": "Sari",
         "price": 500,
         "categories": ["Fashion"]
     },
     {
         "id": 21,
+        "seller": "Digital Inc",
         "name": "Kurtha",
         "price": 400,
         "categories": ["Fashion"]
     },
     {
         "id": 22,
+        "seller": "Black Lab",
         "name": "Churidar",
         "price": 600,
         "categories": ["Fashion"]
     },
     {
         "id": 23,
+        "seller": "Micro Mob",
         "name": "Shirt",
         "price": 700,
         "categories": ["Fashion"]
     },
     {
         "id": 24,
+        "seller": "Digital Inc",
         "name": "Pant",
         "price": 1000,
         "categories": ["Fashion"]
     },
     {
         "id": 25,
+        "seller": "Acon",
         "name": "Towel",
         "price": 500,
         "categories": ["Fashion"]
     },
     {
         "id": 26,
+        "seller": "Black Lab",
         "name": "Gas Stove",
         "price": 5000,
         "categories": ["Cooking"]
     },
     {
         "id": 27,
+        "seller": "Smart Pace",
         "name": "Tupperware",
         "price": 250,
         "categories": ["Cooking"]
     },
     {
         "id": 28,
+        "seller": "Digital Inc",
         "name": "Induction Stove",
         "price": 4000,
         "categories": ["Cooking"]
     },
     {
         "id": 29,
+        "seller": "Micro Mob",
         "name": "Oven",
         "price": 7000,
         "categories": ["Cooking"]
     },
     {
         "id": 30,
+        "seller": "Micro Mob",
         "name": "Spoon",
         "price": 50,
         "categories": ["Cooking"]
     },
     {
         "id": 31,
+        "seller": "Digital Inc",
         "name": "Plates",
         "price": 400,
         "categories": ["Cooking"]
     },
     {
         "id": 32,
+        "seller": "Acon",
         "name": "Enamal ware",
         "price": 900,
         "categories": ["Cooking"]
     },
     {
         "id": 33,
+        "seller": "Black Lab",
         "name": "Gas Lighter",
         "price": 100,
         "categories": ["Cooking"]
     },
     {
         "id": 34,
+        "seller": "Smart Pace",
         "name": "Washing Machine",
         "price": 50000,
         "categories": ["Home"]
     },
     {
         "id": 35,
+        "seller": "Micro Mob",
         "name": "Grinder",
         "price": 10000,
         "categories": ["Home"]
     },
     {
         "id": 36,
+        "seller": "Acon",
         "name": "Fridge",
         "price": 45000,
         "categories": ["Home"]
     },
     {
         "id": 37,
+        "seller": "Smart Pace",
         "name": "Table Lamp",
         "price": 1700,
         "categories": ["Home"]
     },
     {
         "id": 38,
+        "seller": "Digital Inc",
         "name": "Mixi",
         "price": 1500,
         "categories": ["Home"]
     },
     {
         "id": 39,
+        "seller": "Black Lab",
         "name": "Fan",
         "price": 1800,
         "categories": ["Home"]
     },
     {
         "id": 40,
+        "seller": "Acon",
         "name": "Tent",
         "price": 6000,
         "categories": ["Travel"]
     },
     {
         "id": 41,
+        "seller": "Black Lab",
         "name": "Travel Bag",
         "price": 5400,
         "categories": ["Travel"]
     },
     {
         "id": 42,
+        "seller": "Micro Mob",
         "name": "Sleeping Bag",
         "price": 2800,
         "categories": ["Travel"]
     },
     {
         "id": 43,
+        "seller": "Acon",
         "name": "Solar Panel",
         "price": 2000,
         "categories": ["Travel"]
     },
     {
         "id": 44,
+        "seller": "Smart Pace",
         "name": "Hiking Shoe",
         "price": 1500,
         "categories": ["Hiking"]
     },
     {
         "id": 45,
+        "seller": "Digital Inc",
         "name": "Hiking Rope",
         "price": 1200,
         "categories": ["Hiking"]
     },
     {
         "id": 46,
+        "seller": "Micro Mob",
         "name": "Travel Light",
         "price": 800,
         "categories": ["Hiking"]
     },
     {
         "id": 47,
+        "seller": "Smart Pace",
         "name": "Rain Coat",
         "price": 750,
         "categories": ["Hiking"]
     },
     {
         "id": 48,
+        "seller": "Black Lab",
         "name": "Avacado Plant",
         "price": 280,
         "categories": ["Gardening"]
     },
     {
         "id": 49,
+        "seller": "Acon",
         "name": "Rambootan Plant",
         "price": 120,
         "categories": ["Gardening"]
     },
     {
         "id": 50,
+        "seller": "Black Lab",
         "name": "Mouse",
         "price": 135,
         "categories": ["Computer"]
     },
     {
         "id": 51,
+        "seller": "Micro Mob",
         "name": "Keyboard",
         "price": 200,
         "categories": ["Computer"]
     },
     {
         "id": 52,
+        "seller": "Smart Pace",
         "name": "Wifi Router",
         "price": 350,
         "categories": ["Computer"]
     },
     {
         "id": 53,
+        "seller": "Digital Inc",
         "name": "USB Drive",
         "price": 550,
         "categories": ["Computer"]
     },
     {
         "id": 54,
+        "seller": "Acon",
         "name": "External Harddisk",
         "price": 5400,
         "categories": ["Computer"]
     },
     {
         "id": 55,
+        "seller": "Black Lab",
         "name": "USB Cable",
         "price": 65,
         "categories": ["Technology"]
     },
     {
         "id": 56,
+        "seller": "Micro Mob",
         "name": "Mobile Charger",
         "price": 80,
         "categories": ["Technology"]
     },
     {
         "id": 57,
+        "seller": "Acon",
         "name": "Mobile Holder",
         "price": 350,
         "categories": ["Technology"]
     },
     {
         "id": 58,
+        "seller": "Digital Inc",
         "name": "Digital Watch",
         "price": 4900,
         "categories": ["Technology"]
     },
     {
         "id": 59,
+        "seller": "Black Lab",
         "name": "Calculator",
         "price": 600,
         "categories": ["Technology"]
     },
     {
         "id": 60,
+        "seller": "Micro Mob",
         "name": "Invertor",
         "price": 7000,
         "categories": ["Technology"]
     },
     {
         "id": 61,
+        "seller": "Digital Inc",
         "name": "Movie Display",
         "price": 8000,
         "categories": ["Movies"]
     },
     {
         "id": 62,
+        "seller": "Acon",
         "name": "Projector",
         "price": 15000,
         "categories": ["Movies"]
     },
     {
         "id": 63,
+        "seller": "Micro Mob",
         "name": "Home Theater",
         "price": 55000,
         "categories": ["Movies"]
     },
     {
         "id": 64,
+        "seller": "Digital Inc",
         "name": "Doulby Sound System",
         "price": 22000,
         "categories": ["Movies"]
     },
     {
         "id": 65,
+        "seller": "Micro Mob",
         "name": "Online Tickets",
         "price": 500,
         "categories": ["Movies"]
     },
     {
         "id": 66,
+        "seller": "Digital Inc",
         "name": "Dracula",
         "price": 250,
         "categories": ["Reading"]
     },
     {
         "id": 67,
+        "seller": "Black Lab",
         "name": "Bible",
         "price": 850,
         "categories": ["Reading"]
     },
     {
         "id": 68,
+        "seller": "Acon",
         "name": "Harry Potter books",
         "price": 850,
         "categories": ["Reading"]
     },
     {
         "id": 69,
+        "seller": "Smart Pace",
         "name": "Tolstoy stories",
         "price": 1000,
         "categories": ["Reading"]
     },
     {
         "id": 70,
+        "seller": "Micro Mob",
         "name": "Mopposang stories",
         "price": 450,
         "categories": ["Reading"]
     },
     {
         "id": 71,
+        "seller": "Smart Pace",
         "name": "Shakspire Collections",
         "price": 1150,
         "categories": ["Reading"]
     },
     {
         "id": 72,
+        "seller": "Smart Pace",
         "name": "Fairy Stories",
         "price": 150,
         "categories": ["Reading"]
     },
     {
         "id": 73,
+        "seller": "Black Lab",
         "name": "Willworth stories",
         "price": 540,
         "categories": ["Reading"]
     },
     {
         "id": 74,
+        "seller": "Smart Pace",
         "name": "Horror Stories",
         "price": 1450,
         "categories": ["Reading"]
     },
     {
         "id": 75,
+        "seller": "Digital Inc",
         "name": "World Classics",
         "price": 890,
         "categories": ["Reading"]
     },
     {
         "id": 76,
+        "seller": "Acon",
         "name": "Paracetmol",
         "price": 10,
         "categories": ["Medicine"]
     },
     {
         "id": 77,
+        "seller": "Smart Pace",
         "name": "Deoxyrange",
         "price": 400,
         "categories": ["Medicine"]
     },
     {
         "id": 78,
+        "seller": "Black Lab",
         "name": "Metxel",
         "price": 170,
         "categories": ["Medicine"]
     },
     {
         "id": 79,
+        "seller": "Acon",
         "name": "Aspirine",
         "price": 80,
         "categories": ["Medicine"]
     },
     {
         "id": 80,
+        "seller": "Digital Inc",
         "name": "Glycosine",
         "price": 95,
         "categories": ["Medicine"]
     },
     {
         "id": 81,
+        "seller": "Micro Mob",
         "name": "Fluticone",
         "price": 350,
         "categories": ["Medicine"]
     },
     {
         "id": 82,
+        "seller": "Smart Pace",
         "name": "Termometer",
         "price": 640,
         "categories": ["Business"]
     },
     {
         "id": 83,
+        "seller": "Black Lab",
         "name": "Machine Cutter",
         "price": 3500,
         "categories": ["Business"]
     },
     {
         "id": 84,
+        "seller": "Acon",
         "name": "Fish Tank",
         "price": 6700,
         "categories": ["Business"]
     },
     {
         "id": 85,
+        "seller": "Micro Mob",
         "name": "Power Tools",
         "price": 8500,
         "categories": ["Business"]
     },
     {
         "id": 86,
+        "seller": "Smart Pace",
         "name": "Carbone Filler",
         "price": 2700,
         "categories": ["Business"]
     },
     {
         "id": 87,
+        "seller": "Digital Inc",
         "name": "Office Chair",
         "price": 4000,
         "categories": ["Business"]
     },
     {
         "id": 88,
+        "seller": "Black Lab",
         "name": "Office Table",
         "price": 7300,
         "categories": ["Business"]
     },
     {
         "id": 89,
+        "seller": "Micro Mob",
         "name": "Roof Sheets",
         "price": 10000,
         "categories": ["Business"]
     },
     {
         "id": 90,
+        "seller": "Acon",
         "name": "Welding Machine",
         "price": 12000,
         "categories": ["Business"]
     },
     {
         "id": 91,
+        "seller": "Smart Pace",
         "name": "Canon Camera",
         "price": 25000,
         "categories": ["Photography"]
     },
     {
         "id": 92,
+        "seller": "Black Lab",
         "name": "SLR Camera",
         "price": 30000,
         "categories": ["Photography"]
     },
     {
         "id": 93,
+        "seller": "Micro Mob",
         "name": "Tripods",
         "price": 15000,
         "categories": ["Photography"]
     },
     {
         "id": 94,
+        "seller": "Digital Inc",
         "name": "Monopods",
         "price": 10000,
         "categories": ["Photography"]
     },
     {
         "id": 95,
+        "seller": "Black Lab",
         "name": "Camera Batteries",
         "price": 5000,
         "categories": ["Photography"]
     },
     {
         "id": 96,
+        "seller": "Acon",
         "name": "Camera Battery Chargers",
         "price": 4000,
         "categories": ["Photography"]
     },
     {
         "id": 97,
+        "seller": "Smart Pace",
         "name": "Screen Protectors",
         "price": 1550,
         "categories": ["Photography"]
     },
     {
         "id": 98,
+        "seller": "Micro Mob",
         "name": "Camera Bags",
         "price": 2800,
         "categories": ["Photography"]
     },
     {
         "id": 99,
+        "seller": "Smart Pace",
         "name": "Camera Filters",
         "price": 3900,
         "categories": ["Photography"]
     },
     {
         "id": 100,
+        "seller": "Black Lab",
         "name": "Infrared Camera",
         "price": 4600,
         "categories": ["Photography"]
     },
     {
         "id": 101,
+        "seller": "Digital Inc",
         "name": "Hiking Boots",
         "price": 3000,
         "categories": ["Hiking"]
     },
     {
         "id": 102,
+        "seller": "Black Lab",
         "name": "Hiking Stick",
         "price": 1300,
         "categories": ["Hiking"]
     },
     {
         "id": 103,
+        "seller": "Acon",
         "name": "Camping Table",
         "price": 2500,
         "categories": ["Hiking"]
     },
     {
         "id": 104,
+        "seller": "Micro Mob",
         "name": "Hiking Shorts",
         "price": 700,
         "categories": ["Hiking"]
     },
     {
         "id": 105,
+        "seller": "Smart Pace",
         "name": "Hiking Pants",
         "price": 1700,
         "categories": ["Hiking"]
     },
     {
         "id": 106,
+        "seller": "Micro Mob",
         "name": "Car Seat Cover",
         "price": 8000,
         "categories": ["Driving"]
     },
     {
         "id": 107,
+        "seller": "Acon",
         "name": "Car Charger",
         "price": 480,
         "categories": ["Driving"]
     },
     {
         "id": 108,
+        "seller": "Digital Inc",
         "name": "Air freshener",
         "price": 160,
         "categories": ["Driving"]
     },
     {
         "id": 109,
+        "seller": "Smart Pace",
         "name": "Car safety hammer",
         "price": 850,
         "categories": ["Driving"]
     },
     {
         "id": 110,
+        "seller": "Micro Mob",
         "name": "Jumper Cables",
         "price": 950,
         "categories": ["Driving"]
     },
     {
         "id": 111,
+        "seller": "Smart Pace",
         "name": "Spare Tire",
         "price": 4000,
         "categories": ["Driving"]
     },
     {
         "id": 112,
+        "seller": "Acon",
         "name": "Office Table",
         "price": 13500,
         "categories": ["Furniture"]
     },
     {
         "id": 113,
+        "seller": "Micro Mob",
         "name": "Beds",
         "price": 5000,
         "categories": ["Furniture"]
     },
     {
         "id": 114,
+        "seller": "Digital Inc",
         "name": "Sofas",
         "price": 35000,
         "categories": ["Furniture"]
     },
     {
         "id": 115,
+        "seller": "Smart Pace",
         "name": "Mattresses",
         "price": 8000,
         "categories": ["Furniture"]
     },
     {
         "id": 116,
+        "seller": "Black Lab",
         "name": "Dining Sets",
         "price": 12000,
         "categories": ["Furniture"]
     },
     {
         "id": 117,
+        "seller": "Acon",
         "name": "Wardrobe",
         "price": 9000,
         "categories": ["Furniture"]
     },
     {
         "id": 118,
+        "seller": "Smart Pace",
         "name": "Cabinets",
         "price": 13000,
         "categories": ["Furniture"]
     },
     {
         "id": 119,
+        "seller": "Black Lab",
         "name": "Paintings",
         "price": 7000,
         "categories": ["Collectibles"]
     },
     {
         "id": 120,
+        "seller": "Digital Inc",
         "name": "Prints",
         "price": 3500,
         "categories": ["Collectibles"]
     },
     {
         "id": 121,
+        "seller": "Smart Pace",
         "name": "Drawings",
         "price": 4600,
         "categories": ["Collectibles"]
     },
     {
         "id": 122,
+        "seller": "Micro Mob",
         "name": "Stamps",
         "price": 500,
         "categories": ["Collectibles"]
     },
     {
         "id": 123,
+        "seller": "Acon",
         "name": "Antiques",
         "price": 30000,
         "categories": ["Collectibles"]
     },
     {
         "id": 124,
+        "seller": "Black Lab",
         "name": "Cricket Bat",
         "price": 5000,
         "categories": ["Sports"]
     },
     {
         "id": 125,
+        "seller": "Smart Pace",
         "name": "Cricket Glove",
         "price": 3000,
         "categories": ["Sports"]
     },
     {
         "id": 126,
+        "seller": "Digital Inc",
         "name": "Batminton Rak",
         "price": 3000,
         "categories": ["Sports"]
     },
     {
         "id": 127,
+        "seller": "Micro Mob",
         "name": "Shuttle Cok",
         "price": 150,
         "categories": ["Sports"]
     },
     {
         "id": 128,
+        "seller": "Smart Pace",
         "name": "Carrom board",
         "price": 2000,
         "categories": ["Sports"]
     },
     {
         "id": 129,
+        "seller": "Acon",
         "name": "Billiards",
         "price": 15000,
         "categories": ["Sports"]
     },
     {
         "id": 130,
+        "seller": "Smart Pace",
         "name": "Tennis Bat",
         "price": 5500,
         "categories": ["Sports"]
     },
     {
         "id": 131,
+        "seller": "Digital Inc",
         "name": "Cat Food",
         "price": 199,
         "categories": ["Pets"]
     },
     {
         "id": 132,
+        "seller": "Black Lab",
         "name": "Dog Food",
         "price": 400,
         "categories": ["Pets"]
     },
     {
         "id": 133,
+        "seller": "Acon",
         "name": "Dog Belt",
         "price": 600,
         "categories": ["Pets"]
     },
     {
         "id": 134,
+        "seller": "Digital Inc",
         "name": "Dog Cage",
         "price": 8500,
         "categories": ["Pets"]
     },
     {
         "id": 135,
+        "seller": "Black Lab",
         "name": "Food Tray",
         "price": 900,
         "categories": ["Pets"]
     },
     {
         "id": 136,
+        "seller": "Smart Pace",
         "name": "Pet Toys",
         "price": 1000,
         "categories": ["Pets"]
     },
     {
         "id": 137,
+        "seller": "Digital Inc",
         "name": "Casio Watches",
         "price": 16000,
         "categories": ["Watches"]
     },
     {
         "id": 138,
+        "seller": "Micro Mob",
         "name": "Timex",
         "price": 5000,
         "categories": ["Watches"]
     },
     {
         "id": 139,
+        "seller": "Acon",
         "name": "Titan",
         "price": 6000,
         "categories": ["Watches"]
     },
     {
         "id": 140,
+        "seller": "Smart Pace",
         "name": "Fossil",
         "price": 25000,
         "categories": ["Watches"]
     },
     {
         "id": 141,
+        "seller": "Acon",
         "name": "Dried Fruits",
         "price": 800,
         "categories": ["Grocery"]
     },
     {
         "id": 142,
+        "seller": "Black Lab",
         "name": "Rice",
         "price": 250,
         "categories": ["Grocery"]
     },
     {
         "id": 143,
+        "seller": "Digital Inc",
         "name": "Cooking Oil",
         "price": 200,
         "categories": ["Grocery"]
     },
     {
         "id": 144,
+        "seller": "Micro Mob",
         "name": "Chocolate",
         "price": 450,
         "categories": ["Grocery"]
     },
     {
         "id": 145,
+        "seller": "Digital Inc",
         "name": "Noodles",
         "price": 100,
         "categories": ["Grocery"]
     },
     {
         "id": 146,
+        "seller": "Acon",
         "name": "Tea Bags",
         "price": 400,
         "categories": ["Grocery"]
     },
     {
         "id": 147,
+        "seller": "Smart Pace",
         "name": "TV",
         "price": 15000,
         "categories": ["Electronics"]
     },
     {
         "id": 148,
+        "seller": "Digital Inc",
         "name": "Radio",
         "price": 2000,
         "categories": ["Electronics"]
     },
     {
         "id": 149,
+        "seller": "Micro Mob",
         "name": "Tablets",
         "price": 4000,
         "categories": ["Electronics"]
     },
     {
         "id": 150,
+        "seller": "Acon",
         "name": "Memory Cards",
         "price": 300,
         "categories": ["Electronics"]

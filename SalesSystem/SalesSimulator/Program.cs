@@ -1,14 +1,16 @@
 ﻿namespace SalesSimulator
 {
+    using System;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using System.IO;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Hosting;
-    
+
     using Services;
     class Program
     {
+        
         static async Task<int> Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
@@ -25,6 +27,7 @@
                         .AddSingleton<IUserService, UserService>()
                         .AddSingleton<ICarrierService, CarrierService>()
                         .AddSingleton<ISaleService, SaleService>()
+                        .AddSingleton<ConsoleLogger>()
                         .AddSingleton<SalesApplication>()
                         .AddHttpClient("HMAClient").AddHttpMessageHandler<HMACDelegatingHandler>();
                 }).UseConsoleLifetime();
@@ -37,6 +40,8 @@
                 var myService = services.GetRequiredService<SalesApplication>();
                 await myService.RunAsync();
             }
+
+            Console.ReadLine();
 
             return 0;
         }

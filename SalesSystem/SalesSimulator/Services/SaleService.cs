@@ -10,14 +10,20 @@ namespace SalesSimulator.Services
     public class SaleService : ISaleService
     {
         private readonly IConfiguration configuration;
-        private IHttpClientFactory httpFactory;
+        private readonly IHttpClientFactory httpFactory;
+        private readonly ConsoleLogger logger;
         private readonly Random random;
 
 
-        public SaleService(IConfiguration configuration, IHttpClientFactory httpFactory)
+        public SaleService(
+            IConfiguration configuration, 
+            IHttpClientFactory httpFactory,
+            ConsoleLogger logger)
         {
             this.configuration = configuration;
             this.httpFactory = httpFactory;
+            this.logger = logger;
+
             random = new Random();
         }
 
@@ -35,19 +41,20 @@ namespace SalesSimulator.Services
 
             HttpClient client = httpFactory.CreateClient("HMAClient");
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "Sale", purchase);
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "Sales", purchase);
 
             if (response.IsSuccessStatusCode)
             {
                 string responseString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseString);
-                Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode,
-                    response.ReasonPhrase);
+                //Console.WriteLine(responseString);
+                /*Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode,
+                    response.ReasonPhrase);*/
+                logger.Add(responseString);
             }
             else
             {
-                Console.WriteLine("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode,
-                    response.ReasonPhrase);
+                /*Console.WriteLine("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode,
+                    response.ReasonPhrase);*/
             }
         }
     }

@@ -1,14 +1,17 @@
+const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
-    mode: "production",
-
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
-
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx"]
+    mode: "development",
+    output: {
+        filename: 'build/app.js',
+        path: path.resolve("./dist"),
     },
-
+    devtool: "source-map",
+    resolve: {
+        extensions: [".ts", ".tsx", '.js']
+    },
     module: {
         rules: [
             {
@@ -20,7 +23,6 @@ module.exports = {
                     }
                 ]
             },
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce: "pre",
                 test: /\.js$/,
@@ -28,13 +30,19 @@ module.exports = {
             }
         ]
     },
-
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'public/index.html'
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+              { from: './node_modules/react/umd/react.development.js', to: './build/react.development.js' },
+              { from: './node_modules/react-dom/umd/react-dom.development.js', to: './build/react-dom.development.js' },
+            ],
+          })
+    ],
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
     }
-};
+}

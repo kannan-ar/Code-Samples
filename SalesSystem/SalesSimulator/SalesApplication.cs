@@ -95,17 +95,17 @@ namespace SalesSimulator
             var products = new ReadOnlyCollection<Product>(await productService.GetProducts());
             var carriers = new ReadOnlyCollection<Carrier>(await carrierService.GetCarriers());
 
-            TestBuy(users, products, carriers);
+            //TestBuy(users, products, carriers);
 
-            /*while (true)
+            while (true)
             {
                 await Task.Run(() =>
                 {
                     Buy(users, products, carriers);
                 });
 
-                break;
-            }*/
+                Console.ReadLine();
+            }
         }
     }
 }

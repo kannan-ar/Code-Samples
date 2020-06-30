@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using PurchaseHub.Services;
-using PurchaseHub.Services.Implementations;
-
 namespace PurchaseHub
 {
+    using System;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using PurchaseHub.Services;
+    using PurchaseHub.Services.Implementations;
+    using redis = StackExchange.Redis;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,8 +27,16 @@ namespace PurchaseHub
             services.AddSingleton<IDatabase>(
                 new Database(Configuration["DbConnection:Server"], Configuration["DbConnection:KeySpace"])
             );
+
+            services.AddSingleton<Lazy<redis.IConnectionMultiplexer>>(
+                new Lazy<redis.IConnectionMultiplexer>(() =>
+                {
+                    return redis.ConnectionMultiplexer.Connect(Configuration["DbConnection:RedisConnection"]);
+                }));
+
             services.AddSingleton<IDbQuery, DbQuery>();
             services.AddSingleton<ISalesQuery, SalesQuery>();
+            services.AddSingleton<ISalesLog, SalesLog>();
             services.AddHostedService<DatabaseHostedService>();
 
             services.AddControllers();

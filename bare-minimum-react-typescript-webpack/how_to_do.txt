@@ -1,2 +1,2 @@
-npx webpack - to build
-npx http-server -o to run the app
+npm run build
+npm run start

@@ -41,7 +41,7 @@ namespace SalesSimulator.Services
 
             HttpClient client = httpFactory.CreateClient("HMAClient");
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "Sales", purchase);
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "Sales", purchase).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
             {

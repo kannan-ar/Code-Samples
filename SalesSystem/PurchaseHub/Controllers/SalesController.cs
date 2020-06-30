@@ -7,6 +7,7 @@ namespace PurchaseHub.Controllers
     using PurchaseHub.Filters;
     using PurchaseHub.Models;
     using PurchaseHub.Services;
+    using PurchaseHub.Extensions;
 
     [HMACFilter]
     [ApiController]
@@ -14,15 +15,17 @@ namespace PurchaseHub.Controllers
     public class SalesController : ControllerBase
     {
         private readonly ISalesQuery sales;
-        public SalesController(ISalesQuery sales)
+        private readonly ISalesLog log;
+        public SalesController(ISalesQuery sales, ISalesLog log)
         {
             this.sales = sales;
+            this.log = log;
         }
 
         [HttpGet]
         public async IAsyncEnumerable<Car> GetCars()
         {
-            await foreach(var car in sales.GetCars())
+            await foreach (var car in sales.GetCars())
             {
                 yield return car;
             }
@@ -31,9 +34,17 @@ namespace PurchaseHub.Controllers
         [HttpPost]
         public async Task<Purchase> Post(Purchase purchase)
         {
-            //await sales.Sale(purchase);
-            await Task.Delay(100);
+            Task salesTask = sales.Sale(purchase);
+            
+            Task.Run(() => {
+                log.Log(purchase);
+            }).FireAndForget();
+
+            await salesTask.ConfigureAwait(false);
+            
             return purchase;
         }
     }
+
+    
 }

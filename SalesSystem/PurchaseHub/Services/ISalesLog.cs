@@ -1,8 +1,9 @@
 namespace PurchaseHub.Services
 {
+    using System.Threading.Tasks;
     using PurchaseHub.Models;
     public interface ISalesLog
     {
-        void Log(Purchase purchase);
+        Task Log(Purchase purchase);
     }
 }

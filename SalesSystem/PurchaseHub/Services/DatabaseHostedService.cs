@@ -5,7 +5,6 @@ namespace PurchaseHub.Services
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
-    using PurchaseHub.Services;
 
     public class DatabaseHostedService : IHostedService
     {

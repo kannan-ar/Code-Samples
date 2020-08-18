@@ -1,26 +1,21 @@
 namespace PurchaseHub.Services.Implementations
 {
-    using System;
-    using StackExchange.Redis;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.SignalR;
 
     using PurchaseHub.Models;
+    using PurchaseHub.Hubs;
     public class SalesLog : ISalesLog
     {
-        private readonly IDatabase db;
-        public SalesLog(Lazy<IConnectionMultiplexer> redis)
-        {
-            this.db = redis.Value.GetDatabase();
-        }
-        public void Log(Purchase purchase)
-        {
-            HashEntry[] entries = new HashEntry[]{
-                new HashEntry("user", purchase.User.Name),
-                new HashEntry("seller", purchase.Product.Seller),
-                new HashEntry("product", purchase.Product.Name),
-                new HashEntry("amount", purchase.Product.Price * purchase.Quantity)
-            };
+        private readonly IHubContext<SalesHub> salesHub;
 
-            db.HashSet(Guid.NewGuid().ToString("N"), entries);
+        public SalesLog(IHubContext<SalesHub> salesHub)
+        {
+            this.salesHub = salesHub;
+        }
+        public async Task Log(Purchase purchase)
+        {
+            await salesHub.Clients.All.SendAsync("ReceiveSalesUpdate", purchase);
         }
     }
 }

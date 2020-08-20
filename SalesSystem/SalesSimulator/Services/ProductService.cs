@@ -35,13 +35,20 @@ namespace SalesSimulator.Services
 
         public IEnumerable<Product> GetProductsByInterests(ReadOnlyCollection<Product> allProducts, IEnumerable<string> interests)
         {
-            return allProducts.Where(p => p.Categories.ContainsAny(interests));
+            var items = allProducts.Where(p => p.Categories.ContainsAny(interests));
+
+            if(items.Count() == 0)
+            {
+                throw new Exception("No products");
+            }
+            return items;
         }
 
         public IEnumerable<Product> GetProductsToBuy(IEnumerable<Product> products)
         {
             var productList = products.ToList();
             var count = productList.Count();
+
             var buyCount = random.Next(1, count);
 
             for (int i = 0; buyCount > i; i++)

@@ -9,6 +9,7 @@ namespace PurchaseHub.Controllers
     using PurchaseHub.Hubs;
     using PurchaseHub.Models;
     using PurchaseHub.Services;
+    using PurchaseHub.Extensions;
 
     [ApiController]
     [Route("[controller]")]
@@ -25,7 +26,14 @@ namespace PurchaseHub.Controllers
         [HttpGet]
         public async Task<IEnumerable<string>> Get()
         {
-            await log.Log(new Purchase() { Carrier = "DD" });
+            Task task = Task.Delay(1000);
+
+            Task.Run(() => {
+                log.Log(new Purchase());
+            }).FireAndForget();
+
+            await task;
+            
             return Enumerable.Range(1, 5).Select(x => $"Test {x}");
         }
     }

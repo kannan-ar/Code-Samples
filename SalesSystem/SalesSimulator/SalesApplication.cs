@@ -35,6 +35,7 @@ namespace SalesSimulator
 
             var interests = userService.GetCurrentInterests(user);
             var productsByInterests = productService.GetProductsByInterests(products, interests);
+
             var productsToBy = productService.GetProductsToBuy(productsByInterests);
 
             if (productsToBy != null)
@@ -80,6 +81,7 @@ namespace SalesSimulator
             {
                 var interests = userService.GetCurrentInterests(user);
                 var productsByInterests = productService.GetProductsByInterests(products, interests);
+
                 var productsToBy = productService.GetProductsToBuy(productsByInterests);
 
                 if (productsToBy != null)
@@ -103,8 +105,6 @@ namespace SalesSimulator
                 {
                     Buy(users, products, carriers);
                 });
-
-                Console.ReadLine();
             }
         }
     }

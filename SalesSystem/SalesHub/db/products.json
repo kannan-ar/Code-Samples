@@ -270,7 +270,7 @@
         "seller": "Black Lab",
         "name": "Fan",
         "price": 1800,
-        "categories": ["Home"]
+        "categories": ["Home", "Smoking"]
     },
     {
         "id": 40,
@@ -354,14 +354,14 @@
         "seller": "Micro Mob",
         "name": "Keyboard",
         "price": 200,
-        "categories": ["Computer"]
+        "categories": ["Computer", "Gaming"]
     },
     {
         "id": 52,
         "seller": "Smart Pace",
         "name": "Wifi Router",
         "price": 350,
-        "categories": ["Computer"]
+        "categories": ["Computer", "Internet"]
     },
     {
         "id": 53,

@@ -1,29 +1,35 @@
 <template>
-    <div>Test</div>
+  <div>Count - {{count}}</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
 import * as signalR from "@microsoft/signalr";
 
 export default defineComponent({
-  name: 'Dashboard',
-  created: async () => {
-    const connection = new signalR.HubConnectionBuilder()
-      .withUrl("/salesHub")
-      .build();
-    connection.on("ReceiveSalesUpdate", function (purchase) {
-      console.log(purchase);
+  name: "Dashboard",
+  setup() {
+    const count = ref(0);
+
+    onMounted(async () => {
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/salesHub")
+        .build();
+
+      connection.on("ReceiveSalesUpdate", function (purchase) {
+        count.value++;
+      });
+
+      await connection.start();
     });
 
-    await connection.start();
-    const res = await axios.get("/Demo");
-    console.log(res);
-  }
+    return {
+      count,
+    };
+  },
 });
 </script>
 
 <style scoped>
-
 </style>

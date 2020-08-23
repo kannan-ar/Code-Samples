@@ -33,8 +33,8 @@ namespace SalesSimulator
         {
             User user = users[random.Next(0, users.Count)];
 
-            var interests = userService.GetCurrentInterests(user);
-            var productsByInterests = productService.GetProductsByInterests(products, interests);
+            var interests = userService.GetCurrentInterests(user).ToList();
+            var productsByInterests = productService.GetProductsByInterests(products, interests).ToList();
 
             var productsToBy = productService.GetProductsToBuy(productsByInterests);
 
@@ -52,7 +52,6 @@ namespace SalesSimulator
 
             foreach (var product in products)
             {
-
                 tasks.Add(Task.Run(() =>
                 {
                     saleService.Buy(new Purchase
@@ -79,13 +78,14 @@ namespace SalesSimulator
 
             Parallel.ForEach(activeUsers, user =>
             {
-                var interests = userService.GetCurrentInterests(user);
-                var productsByInterests = productService.GetProductsByInterests(products, interests);
+                var interests = userService.GetCurrentInterests(user).ToList();
+                var productsByInterests = productService.GetProductsByInterests(products, interests).ToList();
 
                 var productsToBy = productService.GetProductsToBuy(productsByInterests);
 
                 if (productsToBy != null)
                 {
+                    //Console.WriteLine(DateTime.Now.ToString());
                     BuyOne(user, productsToBy, carriers);
                 }
             });
@@ -97,8 +97,6 @@ namespace SalesSimulator
             var products = new ReadOnlyCollection<Product>(await productService.GetProducts());
             var carriers = new ReadOnlyCollection<Carrier>(await carrierService.GetCarriers());
 
-            //TestBuy(users, products, carriers);
-
             while (true)
             {
                 await Task.Run(() =>
@@ -106,6 +104,7 @@ namespace SalesSimulator
                     Buy(users, products, carriers);
                 });
             }
+
         }
     }
 }

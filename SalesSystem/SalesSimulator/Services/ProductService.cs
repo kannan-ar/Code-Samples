@@ -33,18 +33,12 @@ namespace SalesSimulator.Services
             return await JsonSerializer.DeserializeAsync<IList<Product>>(await httpClient.GetStreamAsync(productsApi));
         }
 
-        public IEnumerable<Product> GetProductsByInterests(ReadOnlyCollection<Product> allProducts, IEnumerable<string> interests)
+        public IEnumerable<Product> GetProductsByInterests(ReadOnlyCollection<Product> allProducts, IList<string> interests)
         {
-            var items = allProducts.Where(p => p.Categories.ContainsAny(interests));
-
-            if(items.Count() == 0)
-            {
-                throw new Exception("No products");
-            }
-            return items;
+            return allProducts.Where(p => p.Categories.Any(c => interests.Contains(c)));
         }
 
-        public IEnumerable<Product> GetProductsToBuy(IEnumerable<Product> products)
+        public IEnumerable<Product> GetProductsToBuy(IList<Product> products)
         {
             var productList = products.ToList();
             var count = productList.Count();

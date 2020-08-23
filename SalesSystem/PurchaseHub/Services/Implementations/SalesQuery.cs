@@ -27,7 +27,7 @@ namespace PurchaseHub.Services.Implementations
         public async Task<Purchase> Sale(Purchase purchase)
         {
             //await query.ExecuteAsync("");
-            await Task.Delay(100);
+            await Task.Yield();
             return purchase;
         }
     }

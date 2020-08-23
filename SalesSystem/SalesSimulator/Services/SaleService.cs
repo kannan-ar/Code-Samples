@@ -16,7 +16,7 @@ namespace SalesSimulator.Services
 
 
         public SaleService(
-            IConfiguration configuration, 
+            IConfiguration configuration,
             IHttpClientFactory httpFactory,
             ConsoleLogger logger)
         {
@@ -43,19 +43,8 @@ namespace SalesSimulator.Services
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "Sales", purchase).ConfigureAwait(false);
 
-            if (response.IsSuccessStatusCode)
-            {
-                string responseString = await response.Content.ReadAsStringAsync();
-                //Console.WriteLine(responseString);
-                /*Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode,
-                    response.ReasonPhrase);*/
-                logger.Add(responseString);
-            }
-            else
-            {
-                /*Console.WriteLine("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode,
-                    response.ReasonPhrase);*/
-            }
+            string responseString = await response.Content.ReadAsStringAsync();
+            logger.Add(responseString);
         }
     }
 }

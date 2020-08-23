@@ -7,7 +7,7 @@ namespace SalesSimulator
     public interface IProductService
     {
         Task<IList<Product>> GetProducts();
-        IEnumerable<Product> GetProductsByInterests(ReadOnlyCollection<Product> allProducts, IEnumerable<string> interests);
-        IEnumerable<Product> GetProductsToBuy(IEnumerable<Product> products);
+        IEnumerable<Product> GetProductsByInterests(ReadOnlyCollection<Product> allProducts, IList<string> interests);
+        IEnumerable<Product> GetProductsToBuy(IList<Product> products);
     }
 }

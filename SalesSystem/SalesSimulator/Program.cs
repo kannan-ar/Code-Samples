@@ -21,7 +21,7 @@
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<HMACDelegatingHandler>()
+                    services.AddTransient<HMACDelegatingHandler>()
                         .AddSingleton<IConfiguration>(configuration)
                         .AddSingleton<IProductService, ProductService>()
                         .AddSingleton<IUserService, UserService>()
@@ -41,6 +41,7 @@
                 await myService.RunAsync();
             }
 
+            Console.WriteLine("Done");
             Console.ReadLine();
 
             return 0;

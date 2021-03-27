@@ -1,11 +1,13 @@
 <template>
-  <div>Count - {{count}}</div>
+  <div>Count - {{ count }}</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
 import * as signalR from "@microsoft/signalr";
+
+import ReportServices from "../ReportServices";
 
 export default defineComponent({
   name: "Dashboard",
@@ -19,6 +21,9 @@ export default defineComponent({
 
       connection.on("ReceiveSalesUpdate", function (purchase) {
         count.value++;
+        if (count.value == 10) {
+          ReportServices.map(x => x.Log(purchase))
+        }
       });
 
       await connection.start();

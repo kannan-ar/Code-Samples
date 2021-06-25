@@ -1,4 +1,5 @@
 <template>
+<div><top-products /></div>
   <div>Count - {{ count }}</div>
 </template>
 
@@ -8,9 +9,13 @@ import axios from "axios";
 import * as signalR from "@microsoft/signalr";
 
 import ReportServices from "../ReportServices";
+import TopProducts from './TopProducts.vue';
 
 export default defineComponent({
   name: "Dashboard",
+  components: {
+    TopProducts
+  },
   setup() {
     const count = ref(0);
 
@@ -22,7 +27,7 @@ export default defineComponent({
       connection.on("ReceiveSalesUpdate", function (purchase) {
         count.value++;
         if (count.value == 10) {
-          ReportServices.map(x => x.Log(purchase))
+          ReportServices.map((x) => x.Log(purchase));
         }
       });
 

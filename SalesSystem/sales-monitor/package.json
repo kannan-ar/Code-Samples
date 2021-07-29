@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@microsoft/signalr": "^3.1.7",
+    "@types/d3": "^6.3.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "d3": "^6.6.1",
     "vue": "^3.0.0-0"
   },
   "devDependencies": {

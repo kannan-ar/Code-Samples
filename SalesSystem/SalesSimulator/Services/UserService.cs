@@ -17,6 +17,7 @@ namespace SalesSimulator.Services
             this.configuration = configuration;
             random = new Random();
         }
+
         public async Task<IList<User>> GetUsers()
         {
             var usersApi = configuration.GetSection("APIUrls")["UsersAPI"];
@@ -53,6 +54,11 @@ namespace SalesSimulator.Services
             {
                 yield return user.Interests[random.Next(0, user.Interests.Length-1)];
             }
+        }
+
+        public bool Think(User user)
+        {
+            var thinkTime = random.Next(0, user.Think);
         }
     }
 }

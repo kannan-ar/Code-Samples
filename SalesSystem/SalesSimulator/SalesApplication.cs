@@ -85,7 +85,6 @@ namespace SalesSimulator
 
                 if (productsToBy != null)
                 {
-                    //Console.WriteLine(DateTime.Now.ToString());
                     BuyOne(user, productsToBy, carriers);
                 }
             });

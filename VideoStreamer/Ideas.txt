@@ -1,0 +1,3 @@
+1. Use MES for decoupling.
+2. Implement token authentication.
+3. Use unity IOC container. Also extend it to implement auto registering factories.

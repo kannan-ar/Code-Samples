@@ -8,15 +8,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Ideas.txt = Ideas.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Data", "VideoStreamer.Data\VideoStreamer.Data.csproj", "{04DBAC1B-E6C8-43BC-B5E1-F0191FB110C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Data", "VideoStreamer.Data\VideoStreamer.Data.csproj", "{04DBAC1B-E6C8-43BC-B5E1-F0191FB110C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Domain", "VideoStreamer.Domain\VideoStreamer.Domain.csproj", "{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Domain", "VideoStreamer.Domain\VideoStreamer.Domain.csproj", "{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Entities", "VideoStreamer.Entities\VideoStreamer.Entities.csproj", "{C610FE16-D72D-4C1E-A7F8-FD6439A7D750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Entities", "VideoStreamer.Entities\VideoStreamer.Entities.csproj", "{C610FE16-D72D-4C1E-A7F8-FD6439A7D750}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Application", "VideoStreamer.Application\VideoStreamer.Application.csproj", "{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Application", "VideoStreamer.Application\VideoStreamer.Application.csproj", "{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Bootstrapper", "VideoStreamer.Bootstrapper\VideoStreamer.Bootstrapper.csproj", "{477B609E-F224-45F2-8D60-81CDDCF4C3C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{477B609E-F224-45F2-8D60-81CDDCF4C3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477B609E-F224-45F2-8D60-81CDDCF4C3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477B609E-F224-45F2-8D60-81CDDCF4C3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477B609E-F224-45F2-8D60-81CDDCF4C3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

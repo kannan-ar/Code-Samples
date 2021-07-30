@@ -1,15 +1,29 @@
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Unity.Microsoft.DependencyInjection;
+using VideoStreamer.API;
 
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+namespace VideoStreamer.API
 {
-    app.UseDeveloperExceptionPage();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseUnityServiceProvider()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }
-
-app.MapGet("/", (Func<string>)(() => "Hello World!"));
-
-app.Run();

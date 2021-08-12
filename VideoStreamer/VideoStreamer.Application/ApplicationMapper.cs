@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using VideoStreamer.Bootstrapper;
 using System.ComponentModel.Composition;
-using System.Text;
-using VideoStreamer.Bootstrapper;
 
-namespace VideoStreamer.Domain
+namespace VideoStreamer.Application
 {
     [Export(typeof(IMapper))]
-    public class DomainMapper : IMapper
+    public class ApplicationMapper : IMapper
     {
         public MapContext CreateMapContext()
         {
-            var sourceType = typeof(VideoStreamer.Data.Entities.User);
-            var targetType = typeof(VideoStreamer.Domain.Entities.User);
+            var sourceType = typeof(Data.Entities.User);
+            var targetType = typeof(Domain.Entities.User);
 
             return new MapContext
             {

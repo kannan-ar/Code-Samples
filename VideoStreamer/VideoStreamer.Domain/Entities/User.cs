@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VideoStreamer.Domain.Entities
+﻿namespace VideoStreamer.Domain.Entities
 {
     public class User
     {

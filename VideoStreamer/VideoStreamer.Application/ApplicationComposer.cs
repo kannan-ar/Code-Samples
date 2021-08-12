@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using VideoStreamer.Bootstrapper;
 using System.ComponentModel.Composition;
-using System.Text;
-using VideoStreamer.Bootstrapper;
 using VideoStreamer.Domain.Services;
+using VideoStreamer.Application.Services;
 
-namespace VideoStreamer.Domain
+namespace VideoStreamer.Application
 {
     [Export(typeof(IComponent))]
-    public class DomainComposer : IComponent
+    public class ApplicationComposer : IComponent
     {
         public void Register(IComposer composer)
         {

@@ -3,9 +3,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VideoStreamer.API.Models;
-using VideoStreamer.Domain;
+using VideoStreamer.Domain.Services;
 
 namespace VideoStreamer.API.Controllers
 {

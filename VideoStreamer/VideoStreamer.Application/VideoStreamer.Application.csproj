@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VideoStreamer.Bootstrapper\VideoStreamer.Bootstrapper.csproj" />
+    <ProjectReference Include="..\VideoStreamer.Data\VideoStreamer.Data.csproj" />
+    <ProjectReference Include="..\VideoStreamer.Domain\VideoStreamer.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

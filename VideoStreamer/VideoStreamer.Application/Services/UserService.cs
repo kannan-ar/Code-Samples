@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VideoStreamer.Data;
 using VideoStreamer.Domain.Entities;
+using VideoStreamer.Domain.Services;
 
-namespace VideoStreamer.Domain.Services
+namespace VideoStreamer.Application.Services
 {
     public class UserService : IUserService
     {

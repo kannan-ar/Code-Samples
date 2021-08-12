@@ -2,8 +2,7 @@
 
 namespace VideoStreamer.Data.Entities
 {
-
-    public abstract class BaseEntity
+    public abstract class Entity
     {
         [Key]
         public int Id { get; set; }

@@ -6,11 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
     <PackageReference Include="Unity.Microsoft.DependencyInjection" Version="5.11.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VideoStreamer.Application\VideoStreamer.Application.csproj" />
     <ProjectReference Include="..\VideoStreamer.Bootstrapper\VideoStreamer.Bootstrapper.csproj" />
     <ProjectReference Include="..\VideoStreamer.Domain\VideoStreamer.Domain.csproj" />
   </ItemGroup>

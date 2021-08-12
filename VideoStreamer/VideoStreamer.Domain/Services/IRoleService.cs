@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using VideoStreamer.Domain.Entities;
 
-namespace VideoStreamer.Domain
+namespace VideoStreamer.Domain.Services
 {
     public interface IRoleService
     {

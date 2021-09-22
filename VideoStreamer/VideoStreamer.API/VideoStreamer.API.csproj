@@ -18,6 +18,7 @@
     <ProjectReference Include="..\VideoStreamer.Application\VideoStreamer.Application.csproj" />
     <ProjectReference Include="..\VideoStreamer.Bootstrapper\VideoStreamer.Bootstrapper.csproj" />
     <ProjectReference Include="..\VideoStreamer.Domain\VideoStreamer.Domain.csproj" />
+    <ProjectReference Include="..\VideoStreamer.Infrastructure\VideoStreamer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

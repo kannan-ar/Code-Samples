@@ -1,0 +1,24 @@
+name: $(BuildID) $(Date:yyyyMMdd)$(Rev:.r)
+
+parameters:
+- name: needDeploy
+  displayName: Do you need to deploy?
+  type: boolean
+  default: false
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - src/*
+
+variables:
+  shouldDeploy: ${{ parameters.needDeploy }}
+
+stages:
+  - stage: Build
+    displayName: Build the code
+    jobs:
+    - template: jobs-build.yml

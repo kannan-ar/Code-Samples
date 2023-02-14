@@ -1,0 +1,7 @@
+jobs:
+  - job: Build
+    displayName: Build Backend
+    pool:
+      vmImage: windows-2022
+    steps:
+    - template: steps-build-backend.yml

@@ -1,0 +1,6 @@
+{
+    "auth_authority": "http://host.docker.internal:8001/",
+    "auth_client_id": "shellappclient",
+    "scope": "openid profile shellappscope",
+    "auth_redirect_uri": "http://host.docker.internal:7000/auth_callback"
+}

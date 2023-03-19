@@ -77,16 +77,17 @@ namespace IdentityServer.Models
                 },
                 new Client
                 {
-                    ClientId ="shellclient",
+                    ClientId ="angularclient",
                     RequireClientSecret = false,
-                    ClientName = "shellclient",
+                    ClientName = "angularclient",
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
                     AllowPlainTextPkce = false,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new [] { "https://localhost:7000/callback" },
-                    PostLogoutRedirectUris = new [] { "https://localhost:7000" },
-                    AllowedCorsOrigins = { "myApi.read" }
+                    RedirectUris = new [] { "http://localhost:7000/callback" },
+                    PostLogoutRedirectUris = new [] { "http://localhost:7000" },
+                    AllowedScopes = { "myApi.read" },
+                    AllowedCorsOrigins = { "http://localhost:7000" }
                 }
             };
     }

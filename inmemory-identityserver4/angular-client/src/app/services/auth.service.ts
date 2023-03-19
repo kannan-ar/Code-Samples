@@ -9,7 +9,7 @@ export class AuthService {
 
     constructor() {
         this.userManager = new UserManager({
-                authority: 'https://localhost:9000/',
+                authority: 'http://localhost:9000/',
                 client_id: 'angularclient',
                 response_type: 'code',
                 scope: 'myApi.read',

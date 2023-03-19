@@ -16,7 +16,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    options.Authority = "https://localhost:9000";
+    options.Authority = "http://localhost:9000";
     options.RequireHttpsMetadata = false;
     options.Audience = "myApi";
 });
@@ -39,8 +39,8 @@ builder.Services.AddSwaggerGen(options =>
         {
             Implicit = new OpenApiOAuthFlow()
             {
-                AuthorizationUrl = new Uri($"https://localhost:9000/connect/authorize"),
-                TokenUrl = new Uri($"https://localhost:9000/connect/token"),
+                AuthorizationUrl = new Uri($"http://localhost:9000/connect/authorize"),
+                TokenUrl = new Uri($"http://localhost:9000/connect/token"),
                 Scopes = new Dictionary<string, string>()
                             {
                                 { "myApi.read", "myApi.read" }
@@ -68,7 +68,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

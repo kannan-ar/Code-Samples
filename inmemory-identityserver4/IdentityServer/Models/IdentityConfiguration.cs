@@ -70,9 +70,9 @@ namespace IdentityServer.Models
                     RequirePkce = true,
                     AllowAccessTokensViaBrowser = true,
                     AllowPlainTextPkce = false,
-                    RedirectUris = { "https://localhost:8000/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "https://localhost:8000/swagger/o2c.html" },
-                    AllowedCorsOrigins = { "https://localhost:8000" },
+                    RedirectUris = { "http://localhost:8000/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:8000/swagger/o2c.html" },
+                    AllowedCorsOrigins = { "http://localhost:8000" },
                     AllowedScopes = { "myApi.read" }
                 },
                 new Client

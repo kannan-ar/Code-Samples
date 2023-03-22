@@ -1,20 +1,22 @@
 import { Injectable } from "@angular/core";
 import { User, UserManager } from 'oidc-client-ts';
+import { AppConfig } from "../models";
+import { selectConfig } from '../store/platform';
+import { Store } from '@ngrx/store';
+import { filter, first } from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root'
-})
+
 export class AuthService {
     userManager: UserManager;
 
-    constructor() {
+    constructor(config: AppConfig) {
         this.userManager = new UserManager({
-                authority: 'http://localhost:9000/',
-                client_id: 'angularclient',
-                response_type: 'code',
-                scope: 'myApi.read',
-                redirect_uri: 'http://localhost:7000/callback'
-            });
+            authority: config.auth_authority,
+            client_id: config.auth_client_id,
+            response_type: 'code',
+            scope: config.auth_scope,
+            redirect_uri: config.auth_redirect_uri
+        });
     }
 
     public login(): Promise<void> {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { filter, first } from 'rxjs/operators';
+
+import { AppConfig } from '../models';
 import { AuthService } from '../services/auth.service';
+import { selectConfig } from '../store/platform';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +13,25 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  authService: AuthService | undefined;
+
   constructor(
-    private authService: AuthService) {
+    private store: Store<{ config: AppConfig }>) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.store.select(selectConfig).pipe(filter(x => x.auth_authority !== "")).pipe(first()).subscribe(x => {
+      console.log(x);
+      this.authService = new AuthService(x);
+    });
   }
 
   public async onLogin() {
-    await this.authService.login();
+    await this.authService!.login();
   }
 
   public async onGetUser() {
-    const user = await this.authService.getUser();
+    const user = await this.authService!.getUser();
     console.log(user);
   }
 }

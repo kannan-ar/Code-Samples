@@ -1,6 +1,6 @@
 {
-    "auth_authority": "http://host.docker.internal:8001/",
-    "auth_client_id": "shellappclient",
-    "scope": "openid profile shellappscope",
-    "auth_redirect_uri": "http://host.docker.internal:7000/auth_callback"
+    "auth_authority": "http://localhost:9000/",
+    "auth_client_id": "angularclient",
+    "auth_scope": "myApi.read",
+    "auth_redirect_uri": "http://localhost:7000/callback"
 }

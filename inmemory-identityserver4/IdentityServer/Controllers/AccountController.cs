@@ -1,9 +1,11 @@
 ﻿using IdentityServer.Models;
 using IdentityServer4;
 using IdentityServer4.Services;
+using IdentityServer4.Stores;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace IdentityServer.Controllers
 {
@@ -36,7 +38,7 @@ namespace IdentityServer.Controllers
                 ModelState.AddModelError("", "Invalid username or password.");
                 return View(model);
             }
-
+            
             if (ModelState.IsValid)
             {
                 var user = _users.FindByUsername(model.UserName);
@@ -70,6 +72,14 @@ namespace IdentityServer.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            var logout = await _interaction.GetLogoutContextAsync(logoutId);
+
+            await HttpContext.SignOutAsync();
+            return Redirect(logout.PostLogoutRedirectUri);
         }
 
         public async Task<IActionResult> Error(string errorId)

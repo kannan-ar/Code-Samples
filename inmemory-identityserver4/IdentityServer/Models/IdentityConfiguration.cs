@@ -84,8 +84,8 @@ namespace IdentityServer.Models
                     RequirePkce = true,
                     AllowPlainTextPkce = false,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new [] { "http://localhost:7000/callback" },
-                    PostLogoutRedirectUris = new [] { "http://localhost:7000" },
+                    RedirectUris =  { "http://localhost:7000/callback" },
+                    PostLogoutRedirectUris =  { "http://localhost:7000" },
                     AllowedScopes = { "myApi.read" },
                     AllowedCorsOrigins = { "http://localhost:7000" }
                 }

@@ -4,18 +4,24 @@ import { AppConfig } from "../models";
 import { selectConfig } from '../store/platform';
 import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs/operators';
+import { ConfigService } from "./config.service";
 
-
+@Injectable({
+    providedIn: 'root'
+  })
 export class AuthService {
     userManager: UserManager;
 
-    constructor(config: AppConfig) {
+    constructor(configService: ConfigService) {
+        const config = configService.appConfig!;
+
         this.userManager = new UserManager({
             authority: config.auth_authority,
             client_id: config.auth_client_id,
             response_type: 'code',
             scope: config.auth_scope,
-            redirect_uri: config.auth_redirect_uri
+            redirect_uri: config.auth_redirect_uri,
+            post_logout_redirect_uri: 'http://localhost:7000'
         });
     }
 

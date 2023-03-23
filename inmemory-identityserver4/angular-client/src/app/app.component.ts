@@ -11,9 +11,4 @@ import { getConfig } from './store/platform';
 })
 export class AppComponent {
   title = 'angular-client';
-
-  constructor(
-    private store: Store<{ config: AppConfig }>) {
-      store.dispatch(getConfig());
-  }
 }

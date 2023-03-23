@@ -4,6 +4,7 @@ import { filter, first } from 'rxjs/operators';
 
 import { AppConfig } from '../models';
 import { AuthService } from '../services/auth.service';
+import { ConfigService } from '../services/config.service';
 import { selectConfig } from '../store/platform';
 
 @Component({
@@ -13,21 +14,23 @@ import { selectConfig } from '../store/platform';
 })
 export class HomeComponent implements OnInit {
 
-  authService: AuthService | undefined;
+  isLoggedIn: Promise<boolean> | null = null;
 
-  constructor(
-    private store: Store<{ config: AppConfig }>) {
+  constructor(private authService: AuthService) {
   }
 
   async ngOnInit() {
-    this.store.select(selectConfig).pipe(filter(x => x.auth_authority !== "")).pipe(first()).subscribe(x => {
-      console.log(x);
-      this.authService = new AuthService(x);
+    this.isLoggedIn = new Promise((resolve, reject) => {
+      this.authService!.isLogged().then(result => resolve(result));
     });
   }
 
   public async onLogin() {
     await this.authService!.login();
+  }
+
+  public async onLogout() {
+    await this.authService!.logout();
   }
 
   public async onGetUser() {

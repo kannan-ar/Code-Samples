@@ -1,2 +1,3 @@
-<a href="#" (click)="onLogin()">Login</a>
+<a href="#" (click)="onLogin()" *ngIf="!(isLoggedIn | async)">Login</a>&nbsp;
+<a href="#" (click)="onLogout()" *ngIf="isLoggedIn | async">Logout</a>&nbsp;
 <a href="#" (click)="onGetUser()">Get User</a>

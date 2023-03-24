@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpBackend  } from "@angular/common/http";
 
 import { AppConfig } from '../models';
 import { Observable } from "rxjs";
@@ -9,7 +9,10 @@ import { tap } from "rxjs/operators";
     providedIn: 'root'
   })
 export class ConfigService {
-    constructor(private http: HttpClient) {
+    private http: HttpClient;
+
+    constructor(private handler: HttpBackend) {
+        this.http = new HttpClient(handler);
     }
 
     private _appConfig: AppConfig | undefined;

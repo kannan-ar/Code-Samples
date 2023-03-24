@@ -5,7 +5,7 @@ using ResourceServer.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthorization();
@@ -52,13 +52,18 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors(options => options
+        .SetIsOriginAllowed(origin => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+    );
+
     app.UseSwagger();
     app.UseSwaggerUI(setup =>
     {

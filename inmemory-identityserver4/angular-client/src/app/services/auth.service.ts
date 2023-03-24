@@ -1,9 +1,5 @@
 import { Injectable } from "@angular/core";
 import { User, UserManager } from 'oidc-client-ts';
-import { AppConfig } from "../models";
-import { selectConfig } from '../store/platform';
-import { Store } from '@ngrx/store';
-import { filter, first } from 'rxjs/operators';
 import { ConfigService } from "./config.service";
 
 @Injectable({
@@ -48,6 +44,11 @@ export class AuthService {
         }).catch(function (e: any) {
             console.error(e);
         });
+    }
+
+    public async getToken(): Promise<string> {
+        const user = await this.userManager.getUser();
+        return user!.access_token;
     }
 
     public async isLogged(): Promise<boolean> {

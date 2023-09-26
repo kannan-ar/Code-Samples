@@ -1,0 +1,2 @@
+﻿1. Enable managed identity for the web app.
+2. In access control of storage account, add the Storage Table Data Contributor role for that web app.

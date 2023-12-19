@@ -3,6 +3,6 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>C:\Repositories\Projects\Code-Samples\az-api-storage-vnet-integration\Library\LibraryApi\Properties\PublishProfiles\ar-web-app - Zip Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Repositories\Projects\Code-Samples\az-api-storage-vnet-integration\Library\LibraryApi\Properties\PublishProfiles\ar-web-app - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

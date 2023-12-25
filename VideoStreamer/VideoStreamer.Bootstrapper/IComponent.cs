@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace VideoStreamer.Bootstrapper
 {
     public interface IComponent
     {
         void Register(IComposer composer);
+        void Configure(IServiceCollection services, IConfiguration configuration);
     }
 }

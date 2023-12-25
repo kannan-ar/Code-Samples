@@ -1,4 +1,7 @@
-﻿namespace VideoStreamer.Bootstrapper
+﻿using AutoMapper.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace VideoStreamer.Bootstrapper
 {
     public interface IComposer
     {

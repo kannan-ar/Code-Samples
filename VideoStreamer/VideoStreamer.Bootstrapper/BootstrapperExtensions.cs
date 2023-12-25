@@ -1,68 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Linq;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 using System.Reflection;
 using Unity;
-using AutoMapper;
 
 namespace VideoStreamer.Bootstrapper
 {
     public static class BootstrapperExtensions
     {
-        private static IEnumerable<Export> GetExports(Type type, string path, string pattern)
+        public static IUnityContainer Bootstrap(this IServiceCollection services, IConfiguration configuration, Plugin plugin)
         {
-            var dir = new DirectoryCatalog(path, pattern);
+            IUnityContainer unityContainer = new UnityContainer();
 
-            var compositionContainer = new CompositionContainer(new AggregateCatalog(new DirectoryCatalog(path, pattern)));
-            return compositionContainer.GetExports(new ImportDefinition(def => true, type.FullName, ImportCardinality.ZeroOrOne, false, false));
-        }
-
-        private static IEnumerable<Type> GetFilteredTypes(Assembly assembly, string nameSpace)
-        {
-            var types = assembly.GetTypes().Where(t => t.IsClass);
-
-            return string.IsNullOrWhiteSpace(nameSpace) ? types : types.Where(t => t.Namespace == nameSpace);
-        }
-
-        public static void Resolve(this IUnityContainer container, string path, string pattern)
-        {
-            IEnumerable<Export> exports = GetExports(typeof(IComponent), path, pattern);
-            IEnumerable<IComponent> modules = exports.Select(export => export.Value as IComponent).Where(x => x != null);
-
-            var composer = new UnityComposer(container);
-
-            foreach (var module in modules)
+            foreach (var pattern in plugin.ComposerPatterns)
             {
-                module.Register(composer);
+                var loader = new BootstrapLoader(plugin.Path, pattern);
+
+                loader.Export(typeof(IComponent));
+
+                loader.Resolve(unityContainer);
+                loader.Configure(services, configuration);
             }
-        }
 
-        public static void ConfigureMap(this IMapperConfigurationExpression mapper, string path, string pattern)
-        {
-            IEnumerable<Export> exports = GetExports(typeof(IMapper), path, pattern);
-            IEnumerable<IMapper> modules = exports.Select(export => export.Value as IMapper).Where(x => x != null);
-
-            foreach (var module in modules)
+            services.AddAutoMapper(cfg =>
             {
-                var context = module.CreateMapContext();
-
-                var sourceTypes = GetFilteredTypes(context.Source.Assembly, context.Source.Namespace);
-                var targetTypes = GetFilteredTypes(context.Target.Assembly, context.Target.Namespace);
-
-                foreach (var sourceType in sourceTypes)
+                foreach (var pattern in plugin.MapperPatterns)
                 {
-                    var targetType = targetTypes.Where(x =>
-                        string.Concat(context.Target.Prefix, x.Name, context.Target.Postfix) ==
-                        string.Concat(context.Source.Prefix, sourceType.Name, context.Source.Postfix)).FirstOrDefault();
-
-                    if (targetType != null)
-                    {
-                        mapper.CreateMap(sourceType, targetType);
-                    }
+                    ConfigureMapper(cfg, plugin.Path, pattern);
                 }
-            }
+            });
+
+            return unityContainer;
+        }
+
+        private static void ConfigureMapper(IMapperConfigurationExpression mapper, string path, string pattern)
+        {
+            var assembly = Assembly.LoadFrom(Path.Combine(path, pattern));
+
+            if (assembly == null) return;
+
+            mapper.AddMaps(assembly);
         }
     }
 }

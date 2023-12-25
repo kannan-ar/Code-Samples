@@ -10,13 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Domain", "VideoStreamer.Domain\VideoStreamer.Domain.csproj", "{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Application", "VideoStreamer.Application\VideoStreamer.Application.csproj", "{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Bootstrapper", "VideoStreamer.Bootstrapper\VideoStreamer.Bootstrapper.csproj", "{477B609E-F224-45F2-8D60-81CDDCF4C3C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.Infrastructure", "VideoStreamer.Infrastructure\VideoStreamer.Infrastructure.csproj", "{F35067EE-F480-405B-8594-C1D52635F653}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Infrastructure", "VideoStreamer.Infrastructure\VideoStreamer.Infrastructure.csproj", "{F35067EE-F480-405B-8594-C1D52635F653}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temp.Api", "Temp.Api\Temp.Api.csproj", "{330395EA-2148-4011-898D-94169B101779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{71514E60-D7A2-423E-AE7E-844A297BB0FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +30,6 @@ Global
 		{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FE511CF-B55C-452D-9E4E-C3E6CBA03E5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCBBC62F-DF79-4709-BDDC-B3D652DFBF44}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +42,14 @@ Global
 		{F35067EE-F480-405B-8594-C1D52635F653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35067EE-F480-405B-8594-C1D52635F653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35067EE-F480-405B-8594-C1D52635F653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330395EA-2148-4011-898D-94169B101779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330395EA-2148-4011-898D-94169B101779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330395EA-2148-4011-898D-94169B101779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330395EA-2148-4011-898D-94169B101779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

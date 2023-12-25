@@ -1,29 +1,33 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Serilog;
 using Unity.Microsoft.DependencyInjection;
-using VideoStreamer.API;
+using VideoStreamer.Bootstrapper;
 
-namespace VideoStreamer.API
+var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+       .ReadFrom.Configuration(builder.Configuration.GetSection("Logging"))
+       .CreateLogger();
+
+builder.Host.UseSerilog();
+
+var plugin = new Plugin();
+builder.Configuration.GetSection("Plugin").Bind(plugin);
+
+var unityContainer = builder.Services.Bootstrap(builder.Configuration, plugin);
+builder.Host.UseUnityServiceProvider(unityContainer);
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+if (!app.Environment.IsProduction())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseUnityServiceProvider()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.MapControllers();
+
+app.Run();

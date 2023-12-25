@@ -1,4 +1,7 @@
-﻿using Unity;
+﻿using AutoMapper.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Unity;
 
 namespace VideoStreamer.Bootstrapper
 {

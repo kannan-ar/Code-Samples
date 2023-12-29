@@ -16,8 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Bootstrapper"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Infrastructure", "VideoStreamer.Infrastructure\VideoStreamer.Infrastructure.csproj", "{F35067EE-F480-405B-8594-C1D52635F653}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temp.Api", "Temp.Api\Temp.Api.csproj", "{330395EA-2148-4011-898D-94169B101779}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{71514E60-D7A2-423E-AE7E-844A297BB0FA}"
 EndProject
 Global
@@ -42,10 +40,6 @@ Global
 		{F35067EE-F480-405B-8594-C1D52635F653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35067EE-F480-405B-8594-C1D52635F653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35067EE-F480-405B-8594-C1D52635F653}.Release|Any CPU.Build.0 = Release|Any CPU
-		{330395EA-2148-4011-898D-94169B101779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{330395EA-2148-4011-898D-94169B101779}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{330395EA-2148-4011-898D-94169B101779}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{330395EA-2148-4011-898D-94169B101779}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71514E60-D7A2-423E-AE7E-844A297BB0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -4,6 +4,7 @@ using AutoMapper;
 using VideoStreamer.Domain.Entities;
 using VideoStreamer.Domain.Services;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace VideoStreamer.Application.Services
 {
@@ -18,9 +19,9 @@ namespace VideoStreamer.Application.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<Role> GetRolesByUserId(int userId)
+        public async Task<IEnumerable<Role>> GetRolesByUserId(int userId)
         {
-            return _mapper.Map<IEnumerable<Role>>(_unitOfWork.RoleRepository.Get(x => x.UserRoles.Any(y => y.UserId == userId)));
+            return _mapper.Map<IEnumerable<Role>>(await _unitOfWork.RoleRepository.Get(x => x.UserRoles.Any(y => y.UserId == userId)));
         }
     }
 }

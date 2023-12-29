@@ -1,5 +1,6 @@
 using Serilog;
 using Unity.Microsoft.DependencyInjection;
+using VideoStreamer.API.Extensions;
 using VideoStreamer.Bootstrapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,15 +19,25 @@ builder.Host.UseUnityServiceProvider(unityContainer);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSwaggerGen();
+//builder.Services.ConfigureAuthorization();
+builder.Services.ConfigureAuthentication(builder.Configuration);
+builder.Services.AddSwagger(builder.Configuration);
 
 var app = builder.Build();
 
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(setup =>
+    {
+        setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Streamer API v1");
+        setup.OAuthClientId("streamer_swagger_client");
+        setup.OAuthAppName("Video Streamer App");
+    });
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace VideoStreamer.Infrastructure.Repositories
 {
@@ -19,7 +20,7 @@ namespace VideoStreamer.Infrastructure.Repositories
             this.dbSet = dbContext.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public async virtual Task<IEnumerable<TEntity>> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             params string[] includeProperties)
@@ -36,17 +37,17 @@ namespace VideoStreamer.Infrastructure.Repositories
                 query = query.Include(includeProperty);
             }
 
-            return orderBy == null ? query.ToList() : orderBy(query).ToList();
+            return orderBy == null ? await query.ToListAsync() : orderBy(query).ToList();
         }
 
-        public virtual TEntity GetById(object id)
+        public async virtual Task<TEntity> GetById(object id)
         {
-            return dbSet.Find(id);
+            return await dbSet.FindAsync(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public async virtual Task Insert(TEntity entity)
         {
-            dbSet.Add(entity);
+            await dbSet.AddAsync(entity);
         }
 
         public virtual void Delete(TEntity entityToDelete)

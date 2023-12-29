@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Threading.Tasks;
 using VideoStreamer.Domain.Entities;
 using VideoStreamer.Domain.Services;
 using VideoStreamer.Infrastructure;
@@ -15,9 +16,9 @@ namespace VideoStreamer.Application.Services
             _mapper = mapper;
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _mapper.Map<User>(_unitOfWork.UserRepository.GetById(id));
+            return _mapper.Map<User>(await _unitOfWork.UserRepository.GetById(id));
         }
     }
 }

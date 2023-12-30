@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using VideoStreamer.API.Authorization;
 using VideoStreamer.API.Helpers;
@@ -11,13 +12,21 @@ namespace VideoStreamer.API.Extensions
     {
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            var clientId = configuration.GetValue<string>("AuthSettings:ClientId") ?? string.Empty;
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.MetadataAddress = string.Concat(configuration.GetValue<string>("AuthSettings:Address") ?? string.Empty, ".well-known/openid-configuration");
-                options.RequireHttpsMetadata = configuration.GetValue<string>("AuthSettings:RequireHttps") == "true";
-                options.Audience = configuration.GetValue<string>("AuthSettings:ClientId") ?? string.Empty;
-            });
+                .AddJwtBearer(options =>
+                {
+                    options.MetadataAddress = string.Concat(configuration.GetValue<string>("AuthSettings:Address") ?? string.Empty, ".well-known/openid-configuration");
+                    options.RequireHttpsMetadata = configuration.GetValue<string>("AuthSettings:RequireHttps") == "true";
+                    options.Audience = clientId;
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidAudience = clientId,
+                        ValidateAudience = true
+                    };
+                });
         }
 
         public static void ConfigureAuthorization(this IServiceCollection services, IConfiguration configuration)

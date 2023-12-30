@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88CD8C3A-64C5-4E78-8FE3-4B84C3AC773F}"
 	ProjectSection(SolutionItems) = preProject
 		Ideas.txt = Ideas.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Domain", "VideoStreamer.Domain\VideoStreamer.Domain.csproj", "{20E51BA8-8BBE-4021-9E7D-9B06BA35D657}"
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Bootstrapper"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.Infrastructure", "VideoStreamer.Infrastructure\VideoStreamer.Infrastructure.csproj", "{F35067EE-F480-405B-8594-C1D52635F653}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{71514E60-D7A2-423E-AE7E-844A297BB0FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamer.API", "VideoStreamer.API\VideoStreamer.API.csproj", "{71514E60-D7A2-423E-AE7E-844A297BB0FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

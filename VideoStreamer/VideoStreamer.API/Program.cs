@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Serilog;
 using Unity.Microsoft.DependencyInjection;
 using VideoStreamer.API.Extensions;
@@ -17,9 +18,11 @@ builder.Configuration.GetSection("Plugin").Bind(plugin);
 var unityContainer = builder.Services.Bootstrap(builder.Configuration, plugin);
 builder.Host.UseUnityServiceProvider(unityContainer);
 
+builder.Services.AddServices();
+
 builder.Services.AddControllersWithViews();
 
-//builder.Services.ConfigureAuthorization();
+builder.Services.ConfigureAuthorization(builder.Configuration);
 builder.Services.ConfigureAuthentication(builder.Configuration);
 builder.Services.AddSwagger(builder.Configuration);
 

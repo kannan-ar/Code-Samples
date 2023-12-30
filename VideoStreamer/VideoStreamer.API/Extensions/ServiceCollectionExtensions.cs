@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
-using VideoStreamer.API.Filters;
+using VideoStreamer.API.Helpers;
 
-//http://localhost:8080/realms/streamer/protocol/openid-connect/auth?response_type=code&client_id=streamer_client
 namespace VideoStreamer.API.Extensions
 {
     public static class ServiceCollectionExtensions
@@ -19,14 +19,22 @@ namespace VideoStreamer.API.Extensions
             });
         }
 
-        public static void ConfigureAuthorization(this IServiceCollection services)
+        public static void ConfigureAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
+            var roles = (configuration.GetValue<string>("RoleSettings:DefaultRole") ?? string.Empty).Split(',');
+
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
                                             .RequireAuthenticatedUser()
+                                            .RequireRole(roles)
                                             .Build();
             });
+        }
+
+        public static void AddServices(this IServiceCollection services)
+        {
+            services.AddTransient<IClaimsTransformation, KeycloakClaimsTransformer>();
         }
 
         public static void AddSwagger(this IServiceCollection services, IConfiguration configuration)

@@ -2,13 +2,12 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace VideoStreamer.API.Filters
+namespace VideoStreamer.API.Helpers
 {
     public class AuthorizeCheckOperationFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            // Check for authorize attribute
             var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ||
                                 context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
+using VideoStreamer.API.Authorization;
 using VideoStreamer.API.Helpers;
 
 namespace VideoStreamer.API.Extensions
@@ -21,20 +22,29 @@ namespace VideoStreamer.API.Extensions
 
         public static void ConfigureAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
-            var roles = (configuration.GetValue<string>("RoleSettings:DefaultRole") ?? string.Empty).Split(',');
-
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
                                             .RequireAuthenticatedUser()
-                                            .RequireRole(roles)
+                                            .AddRequirements(new RoleRequirement(configuration.GetValue<string>("RoleSettings:DefaultRole") ?? string.Empty))
                                             .Build();
+
+                options.AddPolicy(StreamerPolicies.ViewerPolicy, policy =>
+                {
+                    policy.AddRequirements(new RoleRequirement(configuration.GetValue<string>("RoleSettings:ViewerRole") ?? string.Empty));
+                });
+
+                options.AddPolicy(StreamerPolicies.ContributorPolicy, policy =>
+                {
+                    policy.AddRequirements(new RoleRequirement(configuration.GetValue<string>("RoleSettings:ContributorRole") ?? string.Empty));
+                });
             });
         }
 
         public static void AddServices(this IServiceCollection services)
         {
             services.AddTransient<IClaimsTransformation, KeycloakClaimsTransformer>();
+            services.AddSingleton<IAuthorizationHandler, RoleHandler>();
         }
 
         public static void AddSwagger(this IServiceCollection services, IConfiguration configuration)

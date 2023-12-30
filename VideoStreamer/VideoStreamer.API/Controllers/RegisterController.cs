@@ -4,7 +4,7 @@ using VideoStreamer.Domain.Services;
 
 namespace VideoStreamer.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Authorize]
     [ApiController]
     public class RegisterController : ControllerBase

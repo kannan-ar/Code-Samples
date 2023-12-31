@@ -1,3 +1,11 @@
 1. Use MES for decoupling.
 2. Implement token authentication.
 3. Use unity IOC container. Also extend it to implement auto registering factories.
+
+System design
+-------------
+
+Features that can consider later stage
+**************************************
+1. Once a video is uploaded, it should be converted into different video formats to support various devices.
+2. Need to use a CDN to reduce the latency

@@ -1,0 +1,1 @@
+﻿New-AzResourceGroupDeployment -ResourceGroupName Telstra -TemplateFile azuredeploy.json -TemplateParameterFile parameters.json

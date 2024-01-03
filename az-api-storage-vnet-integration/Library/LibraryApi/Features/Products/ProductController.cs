@@ -16,7 +16,14 @@ namespace LibraryApi.Features.Products
         [HttpGet("{key}")]
         public async Task<ActionResult<ProductModel>> Get(string key)
         {
-            return Ok(await productService.Get(key));
+            try
+            {
+                return Ok(await productService.Get(key));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

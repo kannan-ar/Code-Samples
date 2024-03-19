@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: ${DOCKER_REGISTRY-}mediaservicesnginx
+    build:
+      context: .
+      dockerfile: MediaServices.Nginx/Dockerfile
+
+  mediamanager:
+    image: ${DOCKER_REGISTRY-}mediaservicesmediamanager
+    build:
+      context: .
+      dockerfile: MediaServices.MediaManager/Dockerfile
+
+  mediaviewer:
+    image: ${DOCKER_REGISTRY-}mediaservicesmediaviewer
+    build:
+      context: .
+      dockerfile: MediaServices.MediaViewer/Dockerfile
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    command: "azurite --loose --blobHost 0.0.0.0 --blobPort 10000"
+    container_name: "azurite"
+    hostname: azurite
+

@@ -1,0 +1,17 @@
+﻿@model UploadVideo
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-action="Index" method="post" enctype="multipart/form-data">
+    <input asp-for="ResolutionList" type="text" /><br /><br />
+    <select asp-for="MediaType" asp-items="Html.GetEnumSelectList<MediaType>()">
+        <option selected="selected" value="">Please select</option>
+    </select><br /><br />
+    <select asp-for="Encoder" asp-items="Html.GetEnumSelectList<EncoderList>()">
+        <option selected="selected" value="">Please select</option>
+    </select><br /><br />
+    <input asp-for="Video" type="file" /><br /><br />
+    <input type="submit" /><br /><br /><br />
+    <label>@Model.Name</label>
+</form>

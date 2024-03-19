@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaServices.MediaManager", "MediaServices.MediaManager\MediaServices.MediaManager.csproj", "{93C97588-3BBF-4820-84A5-E64D34D6EC6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaServices.MediaViewer", "MediaServices.MediaViewer\MediaServices.MediaViewer.csproj", "{320591B1-7635-4866-B0ED-217A7E1ADF51}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A388B6F1-4936-48AD-A525-D32C6B4FC17C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MediaServices.Nginx", "MediaServices.Nginx", "{687A00B9-85AD-41AC-B921-765700C714BD}"
+	ProjectSection(SolutionItems) = preProject
+		MediaServices.Nginx\Dockerfile = MediaServices.Nginx\Dockerfile
+		MediaServices.Nginx\nginx.conf = MediaServices.Nginx\nginx.conf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93C97588-3BBF-4820-84A5-E64D34D6EC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C97588-3BBF-4820-84A5-E64D34D6EC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C97588-3BBF-4820-84A5-E64D34D6EC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C97588-3BBF-4820-84A5-E64D34D6EC6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320591B1-7635-4866-B0ED-217A7E1ADF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320591B1-7635-4866-B0ED-217A7E1ADF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320591B1-7635-4866-B0ED-217A7E1ADF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320591B1-7635-4866-B0ED-217A7E1ADF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A388B6F1-4936-48AD-A525-D32C6B4FC17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A388B6F1-4936-48AD-A525-D32C6B4FC17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A388B6F1-4936-48AD-A525-D32C6B4FC17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A388B6F1-4936-48AD-A525-D32C6B4FC17C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2430D8DD-0131-4440-8B5B-4E4B7F81D819}
+	EndGlobalSection
+EndGlobal

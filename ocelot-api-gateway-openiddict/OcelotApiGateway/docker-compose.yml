@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  identityservice:
+    image: ${DOCKER_REGISTRY-}identityservice
+    build:
+      context: .
+      dockerfile: IdentityService/Dockerfile
+
+  identitydb:
+    image: mcr.microsoft.com/mssql/server
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+volumes:
+  sqlvolume:
+

@@ -1,0 +1,2 @@
+https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-terraform
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway

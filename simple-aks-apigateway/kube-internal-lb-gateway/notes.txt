@@ -27,4 +27,6 @@ az aks create --resource-group arRG --name arCluster --location centralindia --n
 
 14. If there is any issues, check with Lens. Check the status of load balancer and pod (web app). Also use the forward options. Network -> Services to check the services.
 
+15. Refer: https://rinormaloku.com/prohibiting-direct-access-microservices-aks/
+
 

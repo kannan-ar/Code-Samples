@@ -1,0 +1,30 @@
+1. Create resource group with the command: az group create --name=arRG --location=centralindia
+
+2. Create VNet : az network vnet create --name arVNet --resource-group arRG  --address-prefixes 10.1.0.0/16 --location centralindia
+
+3. Create Subnet for kubernetes : az network vnet subnet create --resource-group arRG --vnet-name arVNet --name arSubnet --address-prefixes 10.1.1.0/24
+
+4. Get the sub net id : az network vnet subnet list --vnet-name arVNet --resource-group arRG --query "[?name=='arSubnet'].id" --output tsv
+
+5. Create the kubernetes cluster with following command. Use the --vnet-subnet-id from the above command.
+az aks create --resource-group arRG --name arCluster --location centralindia --node-count 1 --generate-ssh-keys --node-vm-size "Standard_B2s" --network-plugin azure --vnet-subnet-id /subscriptions/8eda8c03-f2ab-46ee-bfa1-ad931d726b1f/resourceGroups/arRG/providers/Microsoft.Network/virtualNetworks/arVNet/subnets/arSubnet
+
+6. Create azure container registry: az acr create --resource-group arRG  --name arkuberegistry --sku Basic
+
+7. Delete any existing cluster info from kube config: kubectl config delete-context arCluster
+
+8. Add the new cluster info to kube config: az aks get-credentials --name arCluster --resource-group arRG
+
+9. Find the External-IP of load balancer with : kubectl get svc --watch
+
+10. Create new service connection on devops with Docker registery -> Azure container registry. Authentication type -> Service Principal. Select the existing container registry and grant permission to all pipelines.
+
+11. Crete new kubernetes service connection with Authentication method -> KubeConfig. Copy the entrire kube config and select the cluster we need. 
+
+12. Create the pipeline and these variables. environementname=dev-env, kubernetesserviceconnection=arkubeconnection, memorylimit=500Mi, memoryrequest=250Mi
+
+13. If the health prob is unhealthy, there create a custom prob with response code 200-399,404
+
+14. If there is any issues, check with Lens. Check the status of load balancer and pod (web app). Also use the forward options. Network -> Services to check the services.
+
+

@@ -2,9 +2,9 @@ kubectl config delete-context arCluster
 
 az group create --name=arRG --location=centralindia
 
-az network vnet create --name arVNet --resource-group arRG  --address-prefixes 10.150.0.0/16 --location centralindia
+az network vnet create --name arVNet --resource-group arRG  --address-prefixes 10.1.0.0/16 --location centralindia
 
-az network vnet subnet create --resource-group arRG --vnet-name arVNet --name arSubnet --address-prefixes 10.150.20.0/24
+az network vnet subnet create --resource-group arRG --vnet-name arVNet --name arSubnet --address-prefixes 10.1.1.0/24
 
 az network vnet subnet list --vnet-name arVNet --resource-group arRG --query "[?name=='arSubnet'].id" --output tsv
 
@@ -25,3 +25,5 @@ az aks start --name arCluster --resource-group arRG
 kubectl get events
 
 kubectl get service ar-web --watch
+
+kubectl get svc --watch

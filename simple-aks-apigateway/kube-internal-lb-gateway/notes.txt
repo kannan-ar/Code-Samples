@@ -29,4 +29,6 @@ az aks create --resource-group arRG --name arCluster --location centralindia --n
 
 15. Refer: https://rinormaloku.com/prohibiting-direct-access-microservices-aks/
 
+16. If you want quick updates on yaml file, Lens -> Workloads -> Deployments -> Select item -> edit
+
 

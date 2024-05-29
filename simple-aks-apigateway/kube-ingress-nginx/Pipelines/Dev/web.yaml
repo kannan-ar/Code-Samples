@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - dev
+  paths:
+   
+    exclude:
+      - Pipelines/**
+variables:
+  imagePullSecret: 'ar-web'
+  acrUrl : arkuberegistry.azurecr.io
+  imageRepository : ar-web
+  tag : $(Build.BuildId)
+  deploymentyaml : 'deployment.azure.yaml'
+  yamlfullpath : '$(Pipeline.Workspace)/s/Ar.Web/$(deploymentyaml)'
+  registryname : 'arkuberegistry'
+  deploymentnamespace : 'default'
+  deploymentname : 'ar-web'
+  dockerfilepath : '$(Pipeline.Workspace)/s/Dockerfile.root'
+  
+extends:
+  template: ../Templates/ar-template.yml

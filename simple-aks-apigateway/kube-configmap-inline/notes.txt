@@ -10,6 +10,8 @@
 
 6. To check the public ip of ingress, run: kubectl --namespace ingress-basic get services -o wide -w ingress-nginx-controller
 
+7. To create config map, run: kubectl apply -f create-configmap.yaml
+
 7. Create the service connections and deploy the application
 
 8. Create certificate using: openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout certs/ingress-tls.key -out certs/ingress-tls.crt

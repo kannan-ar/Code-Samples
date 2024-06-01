@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - dev
+  paths:
+   
+    exclude:
+      - Pipelines/**
+variables:
+  imagePullSecret: 'ar-web'
+  acrUrl : arkuberegistry.azurecr.io
+  imageRepository : ar-web
+  tag : $(Build.BuildId)
+  deploymentyaml : 'deployment.azure.yaml'
+  yamlfullpath : '$(Pipeline.Workspace)/s/Ar.Web/$(deploymentyaml)'
+  registryname : 'arkuberegistry'
+  deploymentnamespace : 'default'
+  deploymentname : 'ar-web'
+  dockerfilepath : '$(Pipeline.Workspace)/s/Dockerfile.root'
+  deploymentservice: 'ar-web-service'
+  settingsvolumename: 'appsettings-k8s-volume'
+  settingsname: 'appsettings-k8s'
+  volumemountpath: '/app/appsettings.k8s.json'
+  volumemountsubpath: 'appsettings.k8s.json'
+  
+extends:
+  template: ../Templates/ar-template.yml

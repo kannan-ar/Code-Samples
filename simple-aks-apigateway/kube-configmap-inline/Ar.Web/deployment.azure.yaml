@@ -21,9 +21,9 @@ spec:
       - name: #{deploymentname}#
         image: #{acrUrl}#/#{imageRepository}#:#{tag}#
         volumeMounts:
-        - name: 'appsettings-k8s-volume'
-          mountPath: '/app/appsettings.k8s.json'
-          subPath: 'appsettings.k8s.json'
+        - name: #{settingsvolumename}#
+          mountPath: #{volumemountpath}#
+          subPath: #{volumemountsubpath}#
         resources:
           requests:
             memory: #{memoryrequest}#
@@ -41,15 +41,15 @@ spec:
         - secretRef:
             name: #{deploymentname}#
       volumes:
-      - name: 'appsettings-k8s-volume'
+      - name: #{settingsvolumename}#
         configMap:
-          name: 'appsettings-k8s'
+          name: #{settingsname}#
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
- name: 'ar-web-service'
+ name: #{deploymentservice}#
  namespace: #{deploymentnamespace}#
 spec:
  type: ClusterIP

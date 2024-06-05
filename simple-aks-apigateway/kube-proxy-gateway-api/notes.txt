@@ -1,0 +1,24 @@
+1. To create the resources, run: sh create-resources.sh
+
+2. To delete the kube config, run: kubectl config delete-context arCluster
+
+3. To update the kube config, run: az aks get-credentials --name arCluster --resource-group ar-rg
+
+4. To update the ingress-nginx image to container registry, run: sh push-ingress-nginx-acr.sh
+
+5. Fill the IP resource group name and install ingress on kubernetes using: sh install-ingress-nginx.sh
+
+6. To check the public ip of ingress, run: kubectl --namespace ingress-basic get services -o wide -w ingress-nginx-controller
+
+7. To create config map, run: kubectl apply -f api-gateway/create-configmap.yaml
+
+7. Create the service connections and deploy the application
+
+8. Create certificate using: openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout certs/ingress-tls.key -out certs/ingress-tls.crt
+
+9. Create secret by upload: kubectl create secret tls ingress-cert --namespace default --key=certs/ingress-tls.key --cert=certs/ingress-tls.crt -o yaml
+
+8. To install the  kubernetes rule, run: kubectl apply -f configure-ingress-rules.yaml
+
+9. To check whether the kubernetes can pull image from acr. az aks check-acr --resource-group ar-rg --name arCluster --acr arkuberegistry.azurecr.io
+

@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - dev
+  paths:
+   
+    exclude:
+      - Pipelines/**
+variables:
+  imagePullSecret: 'ar-proxy'
+  acrUrl : arkuberegistry.azurecr.io
+  imageRepository : ar-proxy
+  tag : $(Build.BuildId)
+  deploymentyaml : 'deployment.azure.yaml'
+  yamlfullpath : '$(Pipeline.Workspace)/s/AR.Proxy.Gateway/$(deploymentyaml)'
+  registryname : 'arkuberegistry'
+  deploymentnamespace : 'default'
+  deploymentname : 'ar-proxy'
+  dockerfilepath : '$(Pipeline.Workspace)/s/Dockerfile.root'
+  deploymentservice: 'ar-proxy-service'
+  settingsvolumename: 'ocelot-volume'
+  settingsname: 'ocelot-settings'
+  volumemountpath: '/app/ocelot.json'
+  volumemountsubpath: 'ocelot.json'
+  
+extends:
+  template: ../Templates/ar-template.yml

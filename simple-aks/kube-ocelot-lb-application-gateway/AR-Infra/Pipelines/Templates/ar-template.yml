@@ -1,0 +1,77 @@
+stages:
+- stage: build
+  displayName: Build Image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      name: Azure Pipelines
+      
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        containerRegistry: '$(registryname)'
+        repository: '$(imageRepository)'
+        command: 'buildAndPush'
+        Dockerfile: '$(dockerfilepath)'
+        tags: |
+         $(tag)
+        
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(yamlfullpath)'
+        artifact: 'deploymentArtifact'
+        publishLocation: 'pipeline'
+
+- stage: Deploy
+  displayName : Deploy to Dev
+  dependsOn: Build
+  jobs:
+  - deployment: 'Deploy'
+    environment: '$(environementname)'
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: DownloadPipelineArtifact@2
+              displayName: Download Pipeline artifact
+              inputs:
+                buildType: 'current'
+                artifactName: 'deploymentArtifact'
+                targetPath: '$(Build.SourcesDirectory)/manifests'
+            - task: KubernetesManifest@0
+              displayName: Create Secret
+              inputs:
+                action: 'createSecret'
+                kubernetesServiceConnection: 'arkubeconnection'
+                namespace: '$(deploymentnamespace)'
+                secretType: 'dockerRegistry'
+                secretName: '$(imagePullSecret)'
+                dockerRegistryEndpoint: '$(registryname)'
+            
+            - task: replacetokens@5
+              displayName : Replace Tokens
+              inputs:
+                rootDirectory: '$(Build.SourcesDirectory)/manifests'
+                targetFiles: '*.yaml'
+                encoding: 'auto'
+                tokenPattern: 'default'
+                writeBOM: true
+                actionOnMissing: 'fail'
+                keepToken: false
+                actionOnNoFiles: 'continue'
+                enableTransforms: false
+                enableRecursion: false
+                useLegacyPattern: false
+                enableTelemetry: true
+            - task: KubernetesManifest@0
+              displayName : Deploy manifest yaml file to Kubernetes
+              name: 'deploy'
+              inputs:
+                action: 'deploy'
+                kubernetesServiceConnection: 'arkubeconnection'
+                namespace: '$(deploymentnamespace)'
+                manifests: |
+                  manifests/$(deploymentyaml)
+                imagePullSecrets: '$(imagePullSecret)'

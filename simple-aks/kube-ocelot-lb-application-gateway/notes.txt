@@ -1,0 +1,15 @@
+1. To create the resources, run: sh create-resources.sh
+
+2. To delete the kube config, run: kubectl config delete-context ar-cluster
+
+3. To update the kube config, run: az aks get-credentials --name ar-cluster --resource-group ar-rg
+
+4. To create config map, run: kubectl apply -f api-gateway/create-configmap.yaml
+
+5. Create the service connections and deploy the application
+
+6. To create the load balancer, run: kubectl apply -f create-lb.yaml
+
+7. Find the External-IP of load balancer with : kubectl get svc --watch
+
+8. Create an api gateway with custom probe. Use the load balancer internal ip for the backend pool target

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{deploymentname}#
+  namespace: #{deploymentnamespace}#
+spec:
+  progressDeadlineSeconds: 3600
+  selector:
+    matchLabels:
+      app: #{deploymentname}#
+  replicas: 1
+  template:
+    
+    metadata:
+      labels:
+        app: #{deploymentname}#
+    spec:
+      containers:
+      - name: #{deploymentname}#
+        image: #{acrUrl}#/#{imageRepository}#:#{tag}#
+        volumeMounts:
+        - name: #{settingsvolumename}#
+          mountPath: #{volumemountpath}#
+          subPath: #{volumemountsubpath}#
+        resources:
+          requests:
+            memory: #{memoryrequest}#
+            
+          limits:
+            memory: #{memorylimit}#
+     
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 443
+        envFrom:
+       
+        - secretRef:
+            name: #{deploymentname}#
+      volumes:
+      - name: #{settingsvolumename}#
+        configMap:
+          name: #{settingsname}#
+
+   
+
+   
+

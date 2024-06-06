@@ -1,0 +1,23 @@
+trigger:
+  branches:
+    include:
+      - dev
+  paths:
+   
+    exclude:
+      - Pipelines/**
+variables:
+  imagePullSecret: 'ar-infra-api'
+  acrUrl : arkuberegistry.azurecr.io
+  imageRepository : ar-infra-api
+  tag : $(Build.BuildId)
+  deploymentyaml : 'deployment.azure.yaml'
+  yamlfullpath : '$(Pipeline.Workspace)/s/Ar.Infra.Api/$(deploymentyaml)'
+  registryname : 'arkuberegistry'
+  deploymentnamespace : 'default'
+  deploymentname : 'ar-infra-api'
+  dockerfilepath : '$(Pipeline.Workspace)/s/Dockerfile.root'
+  deploymentservice: 'ar-infra-api-service'
+  
+extends:
+  template: ../Templates/ar-template.yml

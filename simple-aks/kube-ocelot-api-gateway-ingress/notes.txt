@@ -12,13 +12,13 @@
 
 7. To create config map, run: kubectl apply -f api-gateway/create-configmap.yaml
 
-7. Create the service connections and deploy the application
+8. Create the service connections and deploy the application
 
-8. Create certificate using: openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout certs/ingress-tls.key -out certs/ingress-tls.crt
+9. Create certificate using: openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout certs/ingress-tls.key -out certs/ingress-tls.crt
 
-9. Create secret by upload: kubectl create secret tls ingress-cert --namespace default --key=certs/ingress-tls.key --cert=certs/ingress-tls.crt -o yaml
+10. Create secret by upload: kubectl create secret tls ingress-cert --namespace default --key=certs/ingress-tls.key --cert=certs/ingress-tls.crt -o yaml
 
-8. To install the  kubernetes rule, run: kubectl apply -f configure-ingress-rules.yaml
+11. To install the  kubernetes rule, run: kubectl apply -f configure-ingress-rules.yaml
 
-9. To check whether the kubernetes can pull image from acr. az aks check-acr --resource-group ar-rg --name arCluster --acr arkuberegistry.azurecr.io
+12. To check whether the kubernetes can pull image from acr. az aks check-acr --resource-group ar-rg --name arCluster --acr arkuberegistry.azurecr.io
 

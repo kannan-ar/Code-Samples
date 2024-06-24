@@ -1,7 +1,10 @@
 using MassTransit;
+using Messaging.Lib;
 using Messaging.Lib.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ITopicManager, TopicManager>();
 
 builder.Services.AddMassTransit(x =>
 {

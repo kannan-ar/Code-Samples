@@ -5,9 +5,20 @@ namespace Messaging.Lib.Consumers
 {
     public class PurchaseCreatedConsumer : IConsumer<PurchaseCreated>
     {
-        public Task Consume(ConsumeContext<PurchaseCreated> context)
+        private readonly ITopicManager _topicManager;
+
+        public PurchaseCreatedConsumer(ITopicManager topicManager)
         {
-            return Task.CompletedTask;
+            _topicManager = topicManager;
+        }
+
+        public async Task Consume(ConsumeContext<PurchaseCreated> context)
+        {
+            await _topicManager.Publish(new PurchaseCompleted
+            {
+                Product = context.Message.Product,
+                Quantity = context.Message.Quantity
+            });
         }
     }
 }

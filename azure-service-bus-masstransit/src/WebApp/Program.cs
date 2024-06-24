@@ -1,6 +1,5 @@
 using MassTransit;
 using Messaging.Lib;
-using Messaging.Lib.Messages;
 using WebApp.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);

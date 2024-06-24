@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Messaging.Lib;
-using Messaging.Lib.QueueMessages;
+using Messaging.Lib.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApp.Models;

@@ -1,6 +1,4 @@
-﻿using MassTransit;
-
-namespace Messaging.Lib.QueueMessages
+﻿namespace Messaging.Lib.Messages
 {
     public record PurchaseCreated
     {

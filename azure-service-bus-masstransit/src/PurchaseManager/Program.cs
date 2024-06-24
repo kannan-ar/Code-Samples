@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<PurchaseMessageConsumer>();
+    x.AddConsumer<PurchaseCreatedConsumer>();
 
     x.UsingAzureServiceBus((context, cfg) =>
     {
@@ -13,13 +13,11 @@ builder.Services.AddMassTransit(x =>
 
         cfg.ReceiveEndpoint(builder.Configuration["QueueSettings:PurchaseQueueName"], e =>
         {
-            e.Consumer<PurchaseMessageConsumer>(context);
+            e.Consumer<PurchaseCreatedConsumer>(context);
         });
     });
 });
 
 var app = builder.Build();
-
-
 
 app.Run();

@@ -1,9 +1,9 @@
 ﻿using MassTransit;
-using Messaging.Lib.QueueMessages;
+using Messaging.Lib.Messages;
 
 namespace Messaging.Lib.Consumers
 {
-    public class PurchaseMessageConsumer : IConsumer<PurchaseCreated>
+    public class PurchaseCreatedConsumer : IConsumer<PurchaseCreated>
     {
         public Task Consume(ConsumeContext<PurchaseCreated> context)
         {

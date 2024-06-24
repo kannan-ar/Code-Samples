@@ -9,6 +9,7 @@ namespace Messaging.Lib
         public QueueManager(ISendEndpointProvider endpointProvider)
         {
             _endpointProvider = endpointProvider;
+
         }
 
         public async Task SendMessage<T>(T message, string queueName)

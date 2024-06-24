@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Messaging.Lib.QueueMessages;
+using Messaging.Lib.Messages;
 using WebApp.Models;
 
 namespace WebApp.Profiles

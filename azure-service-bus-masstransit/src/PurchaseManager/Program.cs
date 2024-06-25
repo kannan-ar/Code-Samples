@@ -14,6 +14,8 @@ builder.Services.AddMassTransit(x =>
     {
         cfg.Host(builder.Configuration["ArServiceBus"]);
 
+        cfg.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+
         cfg.ReceiveEndpoint(builder.Configuration["QueueSettings:PurchaseQueueName"], e =>
         {
             e.Consumer<PurchaseCreatedConsumer>(context);

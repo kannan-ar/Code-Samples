@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  consumerapp:
+    image: ${DOCKER_REGISTRY-}consumerapp
+    build:
+      context: .
+      dockerfile: ConsumerApp/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  producerapp:
+    image: ${DOCKER_REGISTRY-}producerapp
+    build:
+      context: .
+      dockerfile: ProducerApp/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    container_name: "rabbitmqcontainer"
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+
+  webapp:
+    image: ${DOCKER_REGISTRY-}webapp
+    build:
+      context: .
+      dockerfile: WebApp/Dockerfile
+
+  outboxdb:
+    image: mcr.microsoft.com/mssql/server
+
+volumes:
+  rabbitmq_data:
+  sqlserver_data:

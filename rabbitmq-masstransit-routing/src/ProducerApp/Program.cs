@@ -1,10 +1,19 @@
 using MassTransit;
+using MassTransit.Transports.Fabric;
 using Messaging.Lib;
-using Messaging.Lib.Consumers;
 using Messaging.Lib.Entities;
+using Messaging.Lib.Messages;
 using Microsoft.EntityFrameworkCore;
+using ProducerApp;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IPublishManager, PublishManager>();
 
 builder.Services.AddDbContext<SqlDbContext>(x =>
 {
@@ -15,12 +24,12 @@ builder.Services.AddDbContext<SqlDbContext>(x =>
     });
 }, ServiceLifetime.Scoped);
 
-var settings =  builder.Configuration.GetSection("RabbitMqSettings").Get<RabbitMqSettings>();
+builder.Services.InitDatabase();
+
+var settings = builder.Configuration.GetSection("RabbitMqSettings").Get<RabbitMqSettings>();
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<OrderCreatedConsumer>();
-
     x.AddEntityFrameworkOutbox<SqlDbContext>(o =>
     {
         o.QueryDelay = TimeSpan.FromSeconds(1);
@@ -37,17 +46,24 @@ builder.Services.AddMassTransit(x =>
             c.Password(settings.Password);
         });
 
-        cfg.ReceiveEndpoint("order-created-event", e =>
-        {
-            e.UseEntityFrameworkOutbox<SqlDbContext>(context);
-            e.ConfigureConsumer<OrderCreatedConsumer>(context);
-        });
+        cfg.ConfigExchange<CustomerRegistered>(x => x.Message.Type, "customerregistered", "direct");
+
+        cfg.ConfigureEndpoints(context);
     });
 });
 
-
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello world from consumer app");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();

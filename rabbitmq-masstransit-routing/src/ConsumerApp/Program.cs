@@ -24,6 +24,8 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<OrderCreatedConsumer>();
     x.AddConsumer<RegularCustomerRegisteredConsumer>();
     x.AddConsumer<PremiumCustomerRegisteredConsumer>();
+    x.AddConsumer<NotifiedIndiaRegionConsumer>();
+    x.AddConsumer<NotifiedAllRegionConsumer>();
 
     x.AddEntityFrameworkOutbox<SqlDbContext>(o =>
     {
@@ -45,6 +47,8 @@ builder.Services.AddMassTransit(x =>
 
         cfg.ConfigureConsumerEndPoint<RegularCustomerRegisteredConsumer>(context, "regular-customer-registered-event", "customerregistered", "regular", "direct");
         cfg.ConfigureConsumerEndPoint<PremiumCustomerRegisteredConsumer>(context, "premium-customer-registered-event", "customerregistered", "premium", "direct");
+        cfg.ConfigureConsumerEndPoint<NotifiedIndiaRegionConsumer>(context, "notify-india-region-event", "notifyregion", "india.*", "topic");
+        cfg.ConfigureConsumerEndPoint<NotifiedAllRegionConsumer>(context, "notify-all-region-event", "notifyregion", "*.region", "topic");
     });
 });
 

@@ -26,8 +26,8 @@ namespace ProducerApp
                 x.UseRoutingKeyFormatter(formatter);
             });
 
-            cfg.Message<CustomerRegistered>(x => x.SetEntityName(entityName));
-            cfg.Publish<CustomerRegistered>(x => x.ExchangeType = exchangeType);
+            cfg.Message<T>(x => x.SetEntityName(entityName));
+            cfg.Publish<T>(x => x.ExchangeType = exchangeType);
         }
     }
 }

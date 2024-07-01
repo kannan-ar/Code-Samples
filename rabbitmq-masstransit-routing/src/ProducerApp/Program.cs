@@ -47,6 +47,7 @@ builder.Services.AddMassTransit(x =>
         });
 
         cfg.ConfigExchange<CustomerRegistered>(x => x.Message.Type, "customerregistered", "direct");
+        cfg.ConfigExchange<NotifiedRegion>(x => x.Message.Region, "notifyregion", "topic");
 
         cfg.ConfigureEndpoints(context);
     });

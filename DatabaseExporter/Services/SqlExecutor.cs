@@ -22,6 +22,11 @@ internal class SqlExecutor
         return await _connection.QueryAsync<T>(sql, parameters);
     }
 
+    public async Task<T> Get<T>(string sql, object? parameters = null)
+    {
+        return await _connection.QuerySingleAsync<T>(sql, parameters);
+    }
+
     public async Task<IEnumerable<dynamic>> Select(string sql)
     {
         return await _connection.QueryAsync(sql);

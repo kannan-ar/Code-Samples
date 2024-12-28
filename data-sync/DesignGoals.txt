@@ -1,0 +1,11 @@
+1. application core logic should be free from the ui layer
+2. we can consider a web application for the time being. Use the new web technologies to avoid timeout
+3. all the values can be configured on ui. ui can save the configuration
+4. it should be database agnostic. should work with sql server, postgresql and mssql etc
+5. all the components should be extendable by nature
+6. data and structure can be import and export seperatly
+7. save the imported database structure in json format to use later
+8. need a resume support.
+9. need sepeate option to export and import. so that we can import later
+10. project name can be DataSync. It is not limited to database but also flat files, excel etc.
+11. 

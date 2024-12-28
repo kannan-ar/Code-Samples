@@ -1,4 +1,5 @@
 ﻿using DatabaseExporter.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DatabaseExporter.Services;
 
@@ -53,5 +54,21 @@ internal class TableService
     public async Task<IEnumerable<dynamic>> GetTableData(string tableName)
     {
         return await sql.Select($"SELECT * FROM [{tableName}]");
+    }
+
+    public async Task<IEnumerable<dynamic>> GetData(string query)
+    {
+        return await sql.Select(query);
+    }
+    public string GetPaginatedQuery(string tableName, long count)
+    {
+        var offset = count * Settings.DataPageSize;
+
+        return $"SELECT * FROM [{tableName}] ORDER BY [VersionId] OFFSET {offset} ROWS FETCH NEXT {Settings.DataPageSize} ROWS ONLY";
+    }
+
+    public async Task<long> GetTableCount(string tableName)
+    {
+        return await sql.Get<long>($"SELECT COUNT(*) FROM [{tableName}]");
     }
 }

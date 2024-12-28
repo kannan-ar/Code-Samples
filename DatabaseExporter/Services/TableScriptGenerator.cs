@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DatabaseExporter.Services;
 
-internal class ScriptGenerator
+internal class TableScriptGenerator
 {
     public static string GetCreateTableScript(
         string tableName, 
@@ -31,21 +31,21 @@ internal class ScriptGenerator
         sb.Append(GetPrimaryKeyString(primaryKeys));
         sb.AppendLine();
         sb.Append(')');
+        sb.AppendLine();
 
         return sb.ToString();
     }
 
-    public static string GetAlterTableForeignKeyScript(string tableName, ForeignKey foreignKey)
+    public static string GetAlterTableForeignKeyScript(string tableName, IGrouping<string, ForeignKey> foreignKey)
     {
-        return string.Format("ALTER TABLE [{0}] ADD CONSTRAINT {1} FOREIGN KEY ([{2}]) REFERENCES [{3}]([{4}])", 
-            tableName,
-            foreignKey.SourceConstraint,
-            foreignKey.SourceColumn,
-            foreignKey.TargetTable,
-            foreignKey.TargetColumn);
+        var sourceColumns = string.Join(",", foreignKey.Select(x => $"[{x.SourceColumn}]"));
+        var targetTable = foreignKey.Select(x => x.TargetTable).First();
+        var targetColumns = string.Join(",", foreignKey.Select(x => $"[{x.TargetColumn}]"));
+
+        return $"ALTER TABLE [{tableName}] ADD CONSTRAINT {foreignKey.Key} FOREIGN KEY ({sourceColumns}) REFERENCES [{targetTable}] ({targetColumns}){Environment.NewLine}";
     }
 
-    public static string GetInsertDataScript(string tableName, int pageNumer, decimal pageSize, decimal count, IEnumerable<TableColumn> columns, IEnumerable<dynamic> data)
+    public static string GetInsertDataScript(string tableName, long pageNumer, decimal pageSize, long count, IEnumerable<TableColumn> columns, IEnumerable<dynamic> data)
     {
         var pageStart = (pageNumer - 1) * pageSize;
         var pageEnd = pageStart + pageSize;
@@ -62,11 +62,29 @@ internal class ScriptGenerator
         return dataScript.ToString();
     }
 
+    public static string GetInsertDataScript(string tableName, IEnumerable<TableColumn> columns, IEnumerable<dynamic> data)
+    {
+        var dataScript = new StringBuilder();
+
+        foreach (var item in data)
+        {
+            dataScript.Append(GetInsertString(tableName, columns, item));
+            dataScript.AppendLine();
+        }
+
+        return dataScript.ToString();
+    }
+
+    public static string GetTableCountString(string tableName)
+    {
+        return $"SELECT COUNT(*) FROM {tableName}{Environment.NewLine}";
+    }
+
     private static string GetColumnSize(TableColumn column)
     {
         return column.DataType switch
         {
-            "decimal" => string.Format("({0}, {1})", column.NumericPrecision, column.NumericScale),
+            "decimal" or "numeric" => string.Format("({0}, {1})", column.NumericPrecision, column.NumericScale),
             "float" => string.Format("({0})", column.NumericPrecision),
             "datetime2" => string.Format("({0})", column.DatetimePrecision),
             "varchar" or "char" or "nvarchar" => string.Format("({0})", column.CharacterMaxLength == -1? "max" : column.CharacterMaxLength),
@@ -94,6 +112,8 @@ internal class ScriptGenerator
     private static string GetPrimaryKeyString(IEnumerable<PrimaryKey> primaryKeys)
     {
         //if (primaryKeys.Count() > 1) throw new ArgumentException("More than one primary key");
+
+        if (!primaryKeys.Any()) return string.Empty;
 
         var keyNames = string.Join(",", primaryKeys.Select(p => $"[{p.ColumnName}]"));
         var constraintName = primaryKeys.First().ConstraintName;

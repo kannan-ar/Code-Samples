@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  angular-app:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    container_name: angular-app
+    volumes:
+      - ./angular-app/dist/angular-app:/app/dist
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./angular-app/dist/angular-app:/usr/share/nginx/html:ro
+    depends_on:
+      - angular-app

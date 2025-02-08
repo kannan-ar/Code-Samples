@@ -1,0 +1,15 @@
+<dx-data-grid
+  #dataGrid 
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [columns]="columns"
+  keyExpr="Id"
+>
+  <dxo-pager [visible]="true"></dxo-pager>
+</dx-data-grid>
+<button (click)="updateDataSource()">Load Data</button>
+<button (click)="updateColumns()">Columns</button>
+<input [(ngModel)]="delay" />
+<button (click)="startProcess()">Start Process</button>
+<p>Status: {{ status }}</p>
+<p *ngIf="result">Result: {{ result }}</p>

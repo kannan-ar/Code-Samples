@@ -1,0 +1,5 @@
+1. Create an App registration
+2. Create an App role.
+3. Create API permissions and add the created App role here
+4. Go to Expose an API and add the scope.
+5. Add the client application on the scope

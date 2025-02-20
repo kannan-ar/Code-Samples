@@ -1,8 +1,17 @@
-resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.location
+data "azurerm_resource_group" "rg" {
+  name = "rg"
 }
 
+resource "azurerm_api_management" "api" {
+  name                = var.api_management_name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  publisher_email     = var.publisher_email
+  publisher_name      = var.publisher_name
+  sku_name            = "${var.sku}_${var.sku_count}"
+}
+
+/*
 resource "azurerm_service_plan" "app_service" {
   name                = var.app_service_name
   location            = azurerm_resource_group.rg.location
@@ -41,7 +50,7 @@ resource "azuread_application_redirect_uris" "redirect_uri" {
   ]
 }
 
-/*
+
 resource "azurerm_api_management" "apim" {
   name                = var.api_management_name
   location            = azurerm_resource_group.rg.location

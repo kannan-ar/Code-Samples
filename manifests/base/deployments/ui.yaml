@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ui
-          image: "ghcr.io/kannan-ar/ui-service:latest"
+          image: ghcr.io/kannan-ar/ar-packages/ui-service:2b9817b
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

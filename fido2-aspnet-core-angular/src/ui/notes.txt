@@ -1,0 +1,1 @@
+ng serve --ssl true --ssl-key webapplication-key.pem --ssl-cert webapplication-cert.pem --disable-host-check

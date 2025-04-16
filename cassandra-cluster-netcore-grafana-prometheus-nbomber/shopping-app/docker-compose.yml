@@ -1,0 +1,111 @@
+version: '3.4'
+
+services:
+  shoppingapp.api:
+    image: ${DOCKER_REGISTRY-}shoppingappapi
+    build:
+      context: .
+      dockerfile: ShoppingApp.Api/Dockerfile
+
+  cassandra-1:
+    image: "cassandra:latest"
+    container_name: "cassandra-1"
+    hostname: "cassandra-1"
+    networks:
+      cassandra-net:
+        ipv4_address: 172.28.1.1
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      - CASSANDRA_LISTEN_ADDRESS=auto
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra-node-1:/var/lib/cassandra:rw
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "nodetool status"]
+      interval: 2m
+      start_period: 2m
+      timeout: 10s
+      retries: 3
+
+  cassandra-2:
+    image: "cassandra:latest"
+    container_name: "cassandra-2"
+    hostname: "cassandra-2"
+
+    networks:
+      cassandra-net:
+        ipv4_address: 172.28.1.2
+
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      - CASSANDRA_LISTEN_ADDRESS=auto
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+    ports:
+      - "9043:9042"
+    volumes:
+      - cassandra-node-2:/var/lib/cassandra:rw
+    depends_on:
+      cassandra-1:
+        condition: service_healthy
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "nodetool status"]
+      interval: 2m
+      start_period: 2m
+      timeout: 10s
+      retries: 3
+
+  cassandra-3:
+    image: "cassandra:latest"
+    container_name: "cassandra-3"
+    hostname: "cassandra-3"
+
+    networks:
+      cassandra-net:
+        ipv4_address: 172.28.1.3
+
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      - CASSANDRA_LISTEN_ADDRESS=auto
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+    ports:
+      - "9044:9042"
+    volumes:
+      - cassandra-node-3:/var/lib/cassandra:rw
+    depends_on:
+      cassandra-2:
+        condition: service_healthy
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "nodetool status"]
+      interval: 2m
+      start_period: 2m
+      timeout: 10s
+      retries: 3
+
+networks:
+  cassandra-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+  
+volumes:
+  cassandra-node-1:
+  cassandra-node-2:
+  cassandra-node-3:

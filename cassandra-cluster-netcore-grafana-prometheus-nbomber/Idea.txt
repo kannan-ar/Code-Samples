@@ -1,0 +1,62 @@
+This is an architecture of a sub system which track the sales data from a message broker and event source in an appropriate data store. The application capable to intensively writes data using any load testing tool to mimic the heavy traffic. There should be proper health check and monitoring tool for the api endpoints.
+
+suggestions:
+
+for better performance we can split the write and read database. The write database records all the data related to sales and read databases uses the denormalized form of sales data to improve the performance of read query. The message broker might have a abstract layer with masstransit or so.
+
+Message broker: Kafka
+Event source data store: Cassandra
+Read projection data store : Elastic search
+Load testing tool: NBomber
+Orchestration tool: docker compose
+
+
+Order details for event source:
+
+Order id: guid
+Product name: string
+Quantity: int
+Payment method: string
+Shipping address: text
+Billing address: text
+Product info: text
+Amount: numeric
+Discounts: numeric
+Tax amount: numeric
+Subtotal: numeric
+Shipping method: text
+Currency: string
+Cart id: guid
+Seller info: string
+Created at: datetime
+User id: string
+
+Detailed read projection:
+
+Card id: guid
+Created at: datetime
+User id: string
+Payment method: string
+Shipping address: text
+Billing address: text
+Tax amount: numeric
+Subtotal: numeric
+Shipping method: text
+Currency: string
+Items: [
+  Product name: string
+  Quantity: int
+  Amount: numeric
+  Seller info: string
+]
+
+Summary read projection:
+
+Card id: guid
+Products: text
+Shipping address: text
+Billing address: text
+Tax amount: numeric
+Subtotal: numeric
+Shipping method: text
+Currency: string

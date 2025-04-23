@@ -60,3 +60,14 @@ Tax amount: numeric
 Subtotal: numeric
 Shipping method: text
 Currency: string
+
+Microservices:
+
+Command API - Produces messages to Kafka, Starts the event sourcing flow
+Domain Service (.NET Worker Service) - Handle domain logic, manage actor state with Akka.Net
+Projections - Build read models, populate Elasticsearch
+Query API - Exposes queries on the read models
+
+Questions:
+
+how to implement an event sourcing system? what are the things we need to take care?

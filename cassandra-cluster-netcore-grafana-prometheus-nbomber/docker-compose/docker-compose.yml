@@ -42,6 +42,8 @@ services:
     container_name: schema-registry
     depends_on:
       - kafka-1
+      - kafka-2
+      - kafka-3
     networks:
       - event_net
 
@@ -62,11 +64,22 @@ services:
       timeout: 10s
       retries: 3
       
-  loadtester:
+  load-tester:
     image: ${DOCKER_REGISTRY-}loadtester
     build:
       context: ..
       dockerfile: load-tester/Dockerfile
+
+  command-service:
+    image: ${DOCKER_REGISTRY-}commandserviceapi
+    build:
+      context: ..
+      dockerfile: command-service/Dockerfile
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - schema-registry
 
 networks:
   event_net:
@@ -76,5 +89,6 @@ volumes:
   kafka2_data:
   kafka3_data:
   cassandra-node-1:
+
 
 

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AvroSchemas\**" />
+    <EmbeddedResource Remove="AvroSchemas\**" />
+    <None Remove="AvroSchemas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated\" />
+    <Folder Include="Schemas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chr.Avro" Version="9.6.0" />
+    <PackageReference Include="Chr.Avro.Codegen" Version="9.6.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.30.2" />
+    <PackageReference Include="Grpc.Tools" Version="2.71.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

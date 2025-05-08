@@ -9,6 +9,9 @@ services:
       - schema-registry
     networks:
       - event_net
+    volumes:
+      - ./config:/tmp/config/
+    entrypoint: /bin/sh
 
   kafka-1:
     image: bitnami/kafka:3.4
@@ -16,36 +19,29 @@ services:
     container_name: "kafka-1" 
     volumes:
       - kafka1_data:/bitnami
-    networks:
-      - event_net
-
-  kafka-2:
-    image: bitnami/kafka:3.4
-    hostname: "kafka-2"
-    container_name: "kafka-2"    
-    volumes:
-      - kafka2_data:/bitnami
-    networks:
-      - event_net
-
-  kafka-3:
-    image: bitnami/kafka:3.4
-    hostname: "kafka-3"
-    container_name: "kafka-3"   
-    volumes:
-      - kafka3_data:/bitnami
+    healthcheck:
+      test: ["CMD", "kafka-topics.sh", "--bootstrap-server", "kafka-1:9092", "--list"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
     networks:
       - event_net
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:7.5.0
+    image: confluentinc/cp-schema-registry:latest
     container_name: schema-registry
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
+      kafka-1:
+        condition: service_healthy
     networks:
       - event_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/subjects"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
 
   cassandra-1:
     image: "cassandra:latest"
@@ -66,19 +62,21 @@ services:
       
   load-tester:
     image: ${DOCKER_REGISTRY-}loadtester
+    container_name: "load-tester"
     build:
       context: ..
       dockerfile: load-tester/Dockerfile
 
   command-service:
     image: ${DOCKER_REGISTRY-}commandserviceapi
+    container_name: "command-service"
     build:
       context: ..
       dockerfile: command-service/Dockerfile
+    networks:
+      - event_net
     depends_on:
       - kafka-1
-      - kafka-2
-      - kafka-3
       - schema-registry
 
 networks:
@@ -86,8 +84,6 @@ networks:
   
 volumes:
   kafka1_data:
-  kafka2_data:
-  kafka3_data:
   cassandra-node-1:
 
 

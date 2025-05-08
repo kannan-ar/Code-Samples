@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package events;
+
+message OrderCreated {
+    string eventType = 1;
+    string orderId = 2;
+    double amount = 3;
+}

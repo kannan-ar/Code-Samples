@@ -10,6 +10,7 @@
     <DockerServiceName>shoppingapp.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="config.yaml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>

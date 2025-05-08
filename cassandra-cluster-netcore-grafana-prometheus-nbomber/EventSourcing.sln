@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectionService", "projec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryServiceApi", "query-service\QueryServiceApi.csproj", "{B40801C2-FC0A-462D-8B03-F0EFF2217926}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared-libraries", "shared-libraries", "{D6E0D747-5205-4755-B283-EC562F627900}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibraries", "shared-libraries\SharedLibraries.csproj", "{DE089026-AEB2-4720-8BEB-D248C7BA12A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,10 @@ Global
 		{B40801C2-FC0A-462D-8B03-F0EFF2217926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B40801C2-FC0A-462D-8B03-F0EFF2217926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B40801C2-FC0A-462D-8B03-F0EFF2217926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE089026-AEB2-4720-8BEB-D248C7BA12A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE089026-AEB2-4720-8BEB-D248C7BA12A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE089026-AEB2-4720-8BEB-D248C7BA12A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE089026-AEB2-4720-8BEB-D248C7BA12A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{708232D1-4B5E-4053-8B99-E974B940E4F3} = {9EDA56FA-350B-4D2B-A154-3B86719A8648}
 		{41CB01F3-801C-4C49-BF9F-CF559C84C5A5} = {5F64BF91-B725-49FD-AF28-68CC005D9DE6}
 		{B40801C2-FC0A-462D-8B03-F0EFF2217926} = {76E7F111-71B5-43C0-A7F9-396D15365F1E}
+		{DE089026-AEB2-4720-8BEB-D248C7BA12A3} = {D6E0D747-5205-4755-B283-EC562F627900}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87B8D68E-A287-4158-A000-E97C29FD6A8D}

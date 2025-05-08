@@ -1,5 +1,5 @@
 ﻿using Asp.Versioning;
-using CommandServiceApi.Contracts;
+using Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,16 @@ namespace CommandServiceApi.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> Create(OrderCreated orderCreated)
         {
-            await _producer.Produce(orderCreated);
+            try
+            {
+                await _producer.Produce(orderCreated);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
 
             return Created();
         }

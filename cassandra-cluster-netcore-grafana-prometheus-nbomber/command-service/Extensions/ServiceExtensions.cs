@@ -1,6 +1,6 @@
-﻿using CommandServiceApi.Contracts;
-using Confluent.SchemaRegistry;
+﻿using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
+using Events;
 using MassTransit;
 
 namespace CommandServiceApi.Extensions
@@ -22,9 +22,11 @@ namespace CommandServiceApi.Extensions
                         Url = configSection.GetValue<string>("SchemaRegistry")
                     });
 
+                    //rider.AddProducer<OrderCreated>("order-events");
+
                     rider.AddProducer<OrderCreated>("order-events", (context, producer) =>
                     {
-                        producer.SetValueSerializer(new JsonSerializer<OrderCreated>(schemaRegistry));
+                        producer.SetValueSerializer(new ProtobufSerializer<OrderCreated>(schemaRegistry));
                     });
 
                     rider.UsingKafka((context, kafkaConfig) =>

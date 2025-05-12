@@ -17,17 +17,14 @@ namespace CommandServiceApi.Extensions
 
                 x.AddRider(rider =>
                 {
-                    var schemaRegistry = new CachedSchemaRegistryClient(new SchemaRegistryConfig
-                    {
-                        Url = configSection.GetValue<string>("SchemaRegistry")
-                    });
+                    //var schemaRegistry = new CachedSchemaRegistryClient(new SchemaRegistryConfig
+                    //{
+                    //    Url = configSection.GetValue<string>("SchemaRegistry")
+                    //});
 
                     //rider.AddProducer<OrderCreated>("order-events");
 
-                    rider.AddProducer<OrderCreated>("order-events", (context, producer) =>
-                    {
-                        producer.SetValueSerializer(new ProtobufSerializer<OrderCreated>(schemaRegistry));
-                    });
+                    rider.AddProducer<OrderCreated>("order-events");
 
                     rider.UsingKafka((context, kafkaConfig) =>
                     {

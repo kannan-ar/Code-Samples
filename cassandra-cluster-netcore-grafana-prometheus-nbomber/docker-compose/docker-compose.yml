@@ -5,43 +5,23 @@ services:
     image: docker.redpanda.com/redpandadata/console:latest
     container_name: kafka-ui
     depends_on:
-      - kafka-1
-      - schema-registry
+    - kafka-1
     networks:
       - event_net
-    volumes:
-      - ./config:/tmp/config/
-    entrypoint: /bin/sh
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    networks:
+      - event_net
 
   kafka-1:
-    image: bitnami/kafka:3.4
+    image: confluentinc/cp-kafka:latest
     hostname: "kafka-1"
-    container_name: "kafka-1" 
-    volumes:
-      - kafka1_data:/bitnami
-    healthcheck:
-      test: ["CMD", "kafka-topics.sh", "--bootstrap-server", "kafka-1:9092", "--list"]
-      interval: 30s
-      retries: 3
-      start_period: 30s
-      timeout: 10s
-    networks:
-      - event_net
-
-  schema-registry:
-    image: confluentinc/cp-schema-registry:latest
-    container_name: schema-registry
+    container_name: "kafka-1"
     depends_on:
-      kafka-1:
-        condition: service_healthy
+      - zookeeper
     networks:
       - event_net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/subjects"]
-      interval: 30s
-      retries: 3
-      start_period: 10s
-      timeout: 10s
 
   cassandra-1:
     image: "cassandra:latest"
@@ -59,7 +39,7 @@ services:
       start_period: 2m
       timeout: 10s
       retries: 3
-      
+
   load-tester:
     image: ${DOCKER_REGISTRY-}loadtester
     container_name: "load-tester"
@@ -77,14 +57,30 @@ services:
       - event_net
     depends_on:
       - kafka-1
-      - schema-registry
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    depends_on:
+      - command-service
+    networks:
+      - event_net
+
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - prometheus
+    networks:
+      - event_net
+    volumes:
+      - grafana-storage:/var/lib/grafana
 
 networks:
   event_net:
   
 volumes:
-  kafka1_data:
   cassandra-node-1:
-
-
-
+  grafana-storage:

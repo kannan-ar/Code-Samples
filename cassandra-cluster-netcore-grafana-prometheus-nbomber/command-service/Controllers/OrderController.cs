@@ -16,16 +16,7 @@ namespace CommandServiceApi.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> Create(OrderCreated orderCreated)
         {
-            try
-            {
-                await _producer.Produce(orderCreated);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            await _producer.Produce(orderCreated);
 
             return Created();
         }

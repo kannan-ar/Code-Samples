@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using CommandServiceApi.Extensions;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,12 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.ConfigureMassTransit(builder.Configuration);
 
+//builder.Services.AddMetrics();
+
 var app = builder.Build();
+
+app.UseHttpMetrics();
+app.MapMetrics();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

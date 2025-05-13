@@ -15,6 +15,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="kafka-2_0_0.yml" />
     <None Include="prometheus\prometheus.yml" />
   </ItemGroup>
 </Project>

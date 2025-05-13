@@ -27,9 +27,12 @@ services:
       KAFKA_JMX_PORT: 9999
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_JMX_HOSTNAME: kafka-1
+      KAFKA_OPTS: "-javaagent:/opt/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar=7071:/opt/jmx-exporter/kafka-2_0_0.yml"
     ports:
       - "9092:9092"
       - "9999:9999"
+      - "7071:7071"
 
   cassandra-1:
     environment:

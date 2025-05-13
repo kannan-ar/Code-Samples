@@ -18,6 +18,9 @@ services:
     image: confluentinc/cp-kafka:latest
     hostname: "kafka-1"
     container_name: "kafka-1"
+    volumes:
+      - ./kafka-2_0_0.yml:/opt/jmx-exporter/kafka-2_0_0.yml
+      - ./jmx_prometheus_javaagent-0.20.0.jar:/opt/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar
     depends_on:
       - zookeeper
     networks:
@@ -66,6 +69,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
     depends_on:
       - command-service
+      - kafka-1 
     networks:
       - event_net
 

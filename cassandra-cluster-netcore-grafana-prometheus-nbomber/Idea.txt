@@ -68,6 +68,26 @@ Domain Service (.NET Worker Service) - Handle domain logic, manage actor state w
 Projections - Build read models, populate Elasticsearch
 Query API - Exposes queries on the read models
 
-Questions:
+High performance event sourcing system have following characteristics:
 
-how to implement an event sourcing system? what are the things we need to take care?
+Distributed nature - Distributed systems can easily scale and load balancing.
+Highly scalable - Distributed nature can help on this.
+Fault tolerant - In case of failure, the system should easily recover from it.
+Monitoring - Proper logging and metrics and essentials to recover from error.
+Eventual consistency - It helps system to handle high load
+Concurrency - implement concurrency whenever possible
+Batch event processing -
+
+
+1. Configure the kafka with at least once
+2. Configure the fetch.min.bytes, fetch.max.wait.ms, max.poll.records, auto.offset.reset = earliest, enable.auto.commit = false parameters for performance.
+3. For event sourcing with Kafka, the most effective partition assignment strategy is key-based partitioning combined with the Sticky Assignor
+4. Partition-aware consumer groups in Kafka enhance performance in .NET Core applications by enabling parallel message processing and load balancing
+5. Consume messages in batches and process parallely using Channels (System.Threading.Channels) or TPL Dataflow to decouple fetch and processing.
+6. Offload the write to cassandra into a seperate process with bulk insert.
+7. Monitor lag per partition, consumer offsets, processing time, error rate on Kafka and consumers.
+8. Implement backpressure by controlling batch size and concurrency limits.
+9. Use prometheus and grafana to monitor the pressure on partitions
+
+
+

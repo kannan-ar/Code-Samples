@@ -1,24 +1,23 @@
 ﻿using Asp.Versioning;
+using Confluent.Kafka;
 using Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CommandServiceApi.Controllers
+namespace CommandServiceApi.Controllers;
+
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
+[ApiController]
+public class OrderController(ITopicProducer<string, OrderCreated> producer) : ControllerBase
 {
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
-    [ApiController]
-    public class OrderController(ITopicProducer<OrderCreated> producer) : ControllerBase
+    [HttpPost]
+    [ProducesResponseType(201)]
+    public async Task<IActionResult> Create(OrderCreated orderCreated)
     {
-        private readonly ITopicProducer<OrderCreated> _producer = producer;
+        await producer.Produce(orderCreated.OrderId, orderCreated);
 
-        [HttpPost]
-        [ProducesResponseType(201)]
-        public async Task<IActionResult> Create(OrderCreated orderCreated)
-        {
-            await _producer.Produce(orderCreated);
-
-            return Created();
-        }
+        return Created();
     }
 }
+

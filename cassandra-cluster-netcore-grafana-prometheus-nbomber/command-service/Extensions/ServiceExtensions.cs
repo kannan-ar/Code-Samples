@@ -1,37 +1,34 @@
-﻿using Confluent.SchemaRegistry;
-using Confluent.SchemaRegistry.Serdes;
-using Events;
+﻿using Events;
 using MassTransit;
 
-namespace CommandServiceApi.Extensions
+namespace CommandServiceApi.Extensions;
+
+public static class ServiceExtensions
 {
-    public static class ServiceExtensions
+    public static void ConfigureMassTransit(this IServiceCollection services, IConfiguration configuration)
     {
-        public static void ConfigureMassTransit(this IServiceCollection services, IConfiguration configuration)
+        var configSection = configuration.GetSection("Config");
+
+        services.AddMassTransit(x =>
         {
-            var configSection = configuration.GetSection("Config");
+            x.UsingInMemory((context, cfg) => { });
 
-            services.AddMassTransit(x =>
+            x.AddRider(rider =>
             {
-                x.UsingInMemory((context, cfg) => { });
+                //var schemaRegistry = new CachedSchemaRegistryClient(new SchemaRegistryConfig
+                //{
+                //    Url = configSection.GetValue<string>("SchemaRegistry")
+                //});
 
-                x.AddRider(rider =>
+                //rider.AddProducer<OrderCreated>("order-events");
+
+                rider.AddProducer<string, OrderCreated>("order-events");
+
+                rider.UsingKafka((context, kafkaConfig) =>
                 {
-                    //var schemaRegistry = new CachedSchemaRegistryClient(new SchemaRegistryConfig
-                    //{
-                    //    Url = configSection.GetValue<string>("SchemaRegistry")
-                    //});
-
-                    //rider.AddProducer<OrderCreated>("order-events");
-
-                    rider.AddProducer<OrderCreated>("order-events");
-
-                    rider.UsingKafka((context, kafkaConfig) =>
-                    {
-                        kafkaConfig.Host(configSection.GetValue<string>("KafkaEndpoint"));
-                    });
+                    kafkaConfig.Host(configSection.GetValue<string>("KafkaEndpoint"));
                 });
             });
-        }
+        });
     }
 }

@@ -1,7 +1,25 @@
-using DomainService;
+using DomainService.Infrastructure.Kafka;
 
-var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<Worker>();
+internal class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var host = Host.CreateDefaultBuilder(args)
+                .UseOrleans(siloBuilder =>
+                {
+                    siloBuilder.UseLocalhostClustering();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<KafkaPartitionAwareConsumerService>();
+                })
+                .Build();
 
-var host = builder.Build();
-host.Run();
+        await host.RunAsync();
+    }
+
+    static bool IsRunningInKubernetes()
+    {
+        return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("KUBERNETES_SERVICE_HOST"));
+    }
+}

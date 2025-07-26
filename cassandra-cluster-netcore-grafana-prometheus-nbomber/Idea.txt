@@ -88,6 +88,12 @@ Batch event processing -
 7. Monitor lag per partition, consumer offsets, processing time, error rate on Kafka and consumers.
 8. Implement backpressure by controlling batch size and concurrency limits.
 9. Use prometheus and grafana to monitor the pressure on partitions
+----------------------------------------------------------------------
+
+Architecture:
+
+1. Command service has api has an endpoint to submit and order created event. The masstransit responsible for add this event to a kafka topic.
+2. Domain service has a background service which assign a bounded channel to each partition of kafka. 
 
 
 

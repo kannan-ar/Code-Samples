@@ -1,8 +1,6 @@
-﻿
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 using DomainService.Contracts;
 using System.Collections.Concurrent;
-using System.Threading;
 using System.Threading.Channels;
 
 namespace DomainService.Infrastructure.Kafka;
@@ -11,9 +9,11 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
 {
     private readonly ILogger<KafkaPartitionAwareConsumerService> _logger;
     private readonly IGrainFactory _grainFactory;
-    private readonly ConsumerConfig _consumerConfig;
     private readonly string _topic;
+    private readonly ConsumerConfig _baseConfig;
+    private IConsumer<string, string> _consumer;
 
+    private readonly ConcurrentDictionary<TopicPartition, CancellationTokenSource> _partitionTokens = new();
     private readonly ConcurrentDictionary<TopicPartition, Task> _partitionTasks = new();
 
     public KafkaPartitionAwareConsumerService(
@@ -25,96 +25,135 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
         _grainFactory = grainFactory;
         _topic = config["Kafka:TopicName"] ?? string.Empty;
 
-        _consumerConfig = new ConsumerConfig
+        _baseConfig = new ConsumerConfig
         {
             BootstrapServers = config["Kafka:BootstrapServers"],
-            GroupId = "order-consumer-group",
+            GroupId = config["Kafka:GroupName"],
             EnableAutoCommit = false,
-            EnablePartitionEof = false,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            AutoOffsetReset = AutoOffsetReset.Earliest,
+            AllowAutoCreateTopics = true
         };
     }
 
-    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Task.Run(() =>
-        {
-            using var consumer = new ConsumerBuilder<string, string>(_consumerConfig)
-            .SetPartitionsAssignedHandler((c, partitions) =>
-            {
-                foreach (var partition in partitions)
-                {
-                    if (!_partitionTasks.ContainsKey(partition))
-                    {
-                        var task = StartPartitionConsumer(partition, stoppingToken);
-                        _partitionTasks.TryAdd(partition, task);
-                    }
-                }
-
-                return partitions.Select(p => new TopicPartitionOffset(p, Offset.Unset));
-            })
-            .SetPartitionsRevokedHandler((c, partitions) =>
-            {
-                foreach (var partition in partitions)
-                {
-                    _partitionTasks.TryRemove(partition.TopicPartition, out _);
-                }
-            })
+        _consumer = new ConsumerBuilder<string, string>(_baseConfig)
+            .SetPartitionsAssignedHandler(OnPartitionsAssigned)
+            .SetPartitionsRevokedHandler(OnPartitionsRevoked)
             .Build();
 
-            consumer.Subscribe(_topic);
-        }, stoppingToken);
-    }
+        _consumer.Subscribe(_topic);
 
-    private Task StartPartitionConsumer(TopicPartition partition, CancellationToken token)
-    {
-        return Task.Run(async () =>
-        {
-            var config = new ConsumerConfig(_consumerConfig)
-            {
-                GroupId = $"order-processor-group-{partition.Partition.Value}" // Partition-aware group ID
-            };
+        _logger.LogInformation("KafkaConsumerService started and subscribed to topic {Topic}", _topic);
 
-            using var consumer = new ConsumerBuilder<string, string>(config).Build();
-            consumer.Assign(partition);
-
-            var channel = Channel.CreateUnbounded<ConsumeResult<string, string>>();
-            _ = StartDispatcher(channel.Reader, _grainFactory, consumer, token);
-
-            while (!token.IsCancellationRequested)
-            {
-                try
-                {
-                    var msg = consumer.Consume(token);
-                    await channel.Writer.WriteAsync(msg, token);
-                }
-                catch (ConsumeException ex)
-                {
-                    Console.WriteLine($"Consume error: {ex.Error.Reason}");
-                }
-            }
-        }, token);
-    }
-
-    private static async Task StartDispatcher(
-        ChannelReader<ConsumeResult<string, string>> reader,
-        IGrainFactory grainFactory,
-        IConsumer<string, string> consumer,
-        CancellationToken token)
-    {
-        await foreach (var msg in reader.ReadAllAsync(token))
+        // Start polling to trigger assignment
+        while (!stoppingToken.IsCancellationRequested)
         {
             try
             {
-                var grain = grainFactory.GetGrain<IOrderProcessorGrain>(msg.Message.Key);
-                await grain.Process(msg.Message.Value);
-                consumer.Commit(msg);
+                _consumer.Consume(TimeSpan.FromMilliseconds(100));
+            }
+            catch (ConsumeException ex)
+            {
+                _logger.LogError(ex, "Polling error");
+            }
+        }
+    }
+
+    private List<TopicPartitionOffset> OnPartitionsAssigned(IConsumer<string, string> consumer, List<TopicPartition> partitions)
+    {
+        _logger.LogInformation("Partitions assigned: {Partitions}", string.Join(", ", partitions.Select(p => p.Partition.Value)));
+
+        foreach (var partition in partitions)
+        {
+            if (_partitionTasks.ContainsKey(partition))
+                continue;
+
+            var cts = new CancellationTokenSource();
+            var task = Task.Run(() => StartPartitionConsumer(partition, cts.Token));
+            _partitionTokens[partition] = cts;
+            _partitionTasks[partition] = task;
+        }
+
+        // Start from last committed offset or earliest
+        return partitions.Select(p => new TopicPartitionOffset(p, Offset.Unset)).ToList();
+    }
+
+    private void OnPartitionsRevoked(IConsumer<string, string> consumer, List<TopicPartitionOffset> partitions)
+    {
+        _logger.LogWarning("Partitions revoked: {Partitions}", string.Join(", ", partitions.Select(p => p.Partition.Value)));
+
+        foreach (var tpo in partitions)
+        {
+            var tp = tpo.TopicPartition;
+
+            if (_partitionTokens.TryRemove(tp, out var cts))
+            {
+                cts.Cancel();
+                cts.Dispose();
+            }
+
+            if (_partitionTasks.TryRemove(tp, out var task))
+            {
+                _ = task.ContinueWith(t =>
+                {
+                    if (t.IsFaulted)
+                        _logger.LogError(t.Exception, "Partition consumer task faulted after removal.");
+                }, TaskContinuationOptions.OnlyOnFaulted);
+            }
+        }
+    }
+
+    private async Task StartPartitionConsumer(TopicPartition partition, CancellationToken cancellationToken)
+    {
+        var config = new ConsumerConfig(_baseConfig)
+        {
+            ClientId = $"consumer-{partition.Partition.Value}-{Guid.NewGuid()}",
+            GroupId = _baseConfig.GroupId // Same groupId to participate in rebalance
+        };
+
+        using var partitionConsumer = new ConsumerBuilder<string, string>(config).Build();
+        partitionConsumer.Assign(partition);
+
+        _logger.LogInformation("Started consuming partition {Partition}", partition.Partition.Value);
+
+        var grain = _grainFactory.GetGrain<IOrderProcessorGrain>(partition.Partition.Value.ToString());
+
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            try
+            {
+                var result = partitionConsumer.Consume(cancellationToken);
+                if (result?.IsPartitionEOF != false)
+                    continue;
+
+                await grain.Process(result.Message.Value);
+
+                partitionConsumer.Commit(result);
+            }
+            catch (ConsumeException ex)
+            {
+                _logger.LogError(ex, "Kafka error on partition {Partition}", partition.Partition.Value);
+            }
+            catch (OperationCanceledException)
+            {
+                _logger.LogInformation("Consumer cancelled for partition {Partition}", partition.Partition.Value);
+                break;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Processing error: {ex.Message}");
-                // Optional: Send to dead-letter topic
+                _logger.LogError(ex, "Unhandled error in partition {Partition}", partition.Partition.Value);
+                await Task.Delay(1000, cancellationToken); // Brief pause on error
             }
         }
+
+        _logger.LogInformation("Stopped consuming partition {Partition}", partition.Partition.Value);
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        _consumer?.Close();
+        _consumer?.Dispose();
     }
 }

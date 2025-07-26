@@ -24,15 +24,10 @@ services:
       KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:9093
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:9092,EXTERNAL://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
-      KAFKA_JMX_PORT: 9999
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_JMX_HOSTNAME: kafka-1
-      KAFKA_OPTS: "-javaagent:/opt/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar=7071:/opt/jmx-exporter/kafka-2_0_0.yml"
     ports:
       - "9092:9092"
-      - "9999:9999"
-      - "7071:7071"
 
   cassandra-1:
     environment:
@@ -52,6 +47,22 @@ services:
     ports:
       - "7000:8080"
 
+  # command-service-stream:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_HTTP_PORTS=8080
+  #   ports:
+  #     - "7001:8080"
+
+  domain-service:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    ports:
+      - "8081:8081"
+      - "9464:9464"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+
   prometheus:
     ports:
       - "9090:9090"
@@ -61,3 +72,17 @@ services:
       - "3000:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  loki:
+    ports:
+      - "3100:3100"
+
+  tempo:
+    ports:
+    - "3200:3200"
+    - "4317:4317"
+
+  # load-tester:
+  #   environment:
+  #     - GRPC_SERVER_URL=http://command-service-stream:7001
+

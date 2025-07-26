@@ -1,5 +1,5 @@
-﻿using Events;
-using MassTransit;
+﻿using MassTransit;
+using SharedLibraries.Schemas;
 
 namespace CommandServiceApi.Extensions;
 

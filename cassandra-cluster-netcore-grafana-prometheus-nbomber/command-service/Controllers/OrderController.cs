@@ -1,8 +1,7 @@
 ﻿using Asp.Versioning;
-using Confluent.Kafka;
-using Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibraries.Schemas;
 
 namespace CommandServiceApi.Controllers;
 

@@ -1,8 +1,43 @@
 using Asp.Versioning;
 using CommandServiceApi.Extensions;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Prometheus;
+using Serilog;
+using Serilog.Sinks.Grafana.Loki;
+using Serilog.Enrichers.Span;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var loggingConfig = builder.Configuration.GetSection("Logging");
+var applicationName = loggingConfig.GetValue<string>("Loki:ApplicationName") ?? "UnknownService";
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+    {
+        tracerProviderBuilder
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddSource(applicationName)
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(applicationName))
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(builder.Configuration["Tempo:OtlpEndpoint"] 
+                    ?? throw new ArgumentNullException("OtlpEndpoint"));
+            });
+    });
+
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    var loggingConfig = context.Configuration.GetSection("Logging");
+
+    configuration
+        .Enrich.FromLogContext()
+        .Enrich.WithProperty("Application", applicationName)
+        .Enrich.WithSpan()
+        .WriteTo.GrafanaLoki(loggingConfig.GetValue<string>("Loki:LokiUrl") 
+            ?? throw new ArgumentNullException("LokiUrl"));
+});
 
 // Add services to the container.
 

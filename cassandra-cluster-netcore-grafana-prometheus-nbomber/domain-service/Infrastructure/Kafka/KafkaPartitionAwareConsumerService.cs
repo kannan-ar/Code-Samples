@@ -1,7 +1,10 @@
 ﻿using Confluent.Kafka;
 using DomainService.Contracts;
+using OpenTelemetry;
+using OpenTelemetry.Context.Propagation;
 using System.Collections.Concurrent;
-using System.Threading.Channels;
+using System.Diagnostics;
+using System.Text;
 
 namespace DomainService.Infrastructure.Kafka;
 
@@ -15,6 +18,8 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
 
     private readonly ConcurrentDictionary<TopicPartition, CancellationTokenSource> _partitionTokens = new();
     private readonly ConcurrentDictionary<TopicPartition, Task> _partitionTasks = new();
+    private static readonly ActivitySource ActivitySource = new("DomainService");
+    private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
 
     public KafkaPartitionAwareConsumerService(
         ILogger<KafkaPartitionAwareConsumerService> logger,
@@ -127,6 +132,15 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
                 if (result?.IsPartitionEOF != false)
                     continue;
 
+                var parentContext = Propagator.Extract(default, result.Message.Headers, ExtractTraceContextFromHeaders);
+                Baggage.Current = parentContext.Baggage;
+
+                using var activity = ActivitySource.StartActivity("Order.Process", ActivityKind.Consumer, parentContext.ActivityContext);
+
+                activity?.SetTag("messaging.kafka.partition", partition.Partition.Value);
+                activity?.SetTag("messaging.kafka.topic", result.Topic);
+                activity?.SetTag("messaging.kafka.offset", result.Offset.Value);
+
                 await grain.Process(result.Message.Value);
 
                 partitionConsumer.Commit(result);
@@ -148,6 +162,15 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
         }
 
         _logger.LogInformation("Stopped consuming partition {Partition}", partition.Partition.Value);
+    }
+
+    private static IEnumerable<string> ExtractTraceContextFromHeaders(Headers headers, string key)
+    {
+        var header = headers?.FirstOrDefault(h => h.Key == key);
+        if (header?.GetValueBytes() is byte[] valueBytes)
+        {
+            yield return Encoding.UTF8.GetString(valueBytes);
+        }
     }
 
     public override void Dispose()

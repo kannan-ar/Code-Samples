@@ -1,9 +1,10 @@
 using DomainService.Infrastructure.Kafka;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Exporter;
-using Microsoft.Extensions.Options;
-using System.Diagnostics.Metrics;
+using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Enrichers.Span;
+using Serilog.Sinks.Grafana.Loki;
 
 internal class Program
 {
@@ -11,7 +12,24 @@ internal class Program
     {
         try
         {
+            var config = new ConfigurationBuilder()
+                                .AddJsonFile("appsettings.json")
+                                .Build();
+
+            var applicationName = config["Logging:Loki:ApplicationName"] ?? "domain-service";
+            var lokiUrl = config["Logging:Loki:LokiUrl"]
+                ?? throw new ArgumentNullException("Logging:Loki:LokiUrl");
+
+            Log.Logger = new LoggerConfiguration()
+                                .Enrich.FromLogContext()
+                                .Enrich.WithSpan()
+                                .Enrich.With<ActivityEnricher>()
+                                .Enrich.WithProperty("Application", applicationName)
+                                .WriteTo.GrafanaLoki(lokiUrl)
+                                .CreateLogger();
+
             var host = Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .UseOrleans(siloBuilder =>
                 {
                     siloBuilder
@@ -22,6 +40,17 @@ internal class Program
                     services.AddOpenTelemetry()
                                 .ConfigureResource(resource => resource
                                     .AddService("domain-service"))
+                                .WithTracing(tracerProviderBuilder =>
+                                {
+                                    tracerProviderBuilder
+                                        .AddSource(applicationName)
+                                        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(applicationName))
+                                        .AddOtlpExporter(options =>
+                                        {
+                                            options.Endpoint = new Uri(config["Tempo:OtlpEndpoint"]
+                                                ?? throw new ArgumentNullException("Tempo OtlpEndpoint"));
+                                        });
+                                })
                                 .WithMetrics(metrics =>
                                 {
                                     metrics
@@ -46,7 +75,7 @@ internal class Program
             Console.WriteLine($"Error during startup: {ex.Message}");
             return;
         }
-        
+
     }
 
     static bool IsRunningInKubernetes()

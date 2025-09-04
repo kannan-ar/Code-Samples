@@ -2,6 +2,33 @@ version: '3.8'
 
 services:
 
+  # load-tester:
+  #   environment:
+  #     - GRPC_SERVER_URL=http://command-service-stream:7001
+
+  command-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "7000:8080"
+
+  # command-service-stream:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_HTTP_PORTS=8080
+  #   ports:
+  #     - "7001:8080"
+
+  domain-service:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    ports:
+      - "8081:8081"
+      - "9464:9464"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+
   kafka-ui:
     environment:
       KAFKA_BROKERS: "kafka-1:9092"
@@ -40,28 +67,14 @@ services:
     ports:
       - "9042:9042"
 
-  command-service:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-    ports:
-      - "7000:8080"
-
-  # command-service-stream:
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_HTTP_PORTS=8080
+  # cassandra-web:
   #   ports:
-  #     - "7001:8080"
-
-  domain-service:
-    environment:
-      - DOTNET_ENVIRONMENT=Development
-    ports:
-      - "8081:8081"
-      - "9464:9464"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+  #     - "3001:3000"
+  #   environment:
+  #     - CASSANDRA_HOST=cassandra-1
+  #     - CASSANDRA_PORT=9042
+  #     - CASSANDRA_USER=admin
+  #     - CASSANDRA_PASSWORD=admin
 
   prometheus:
     ports:
@@ -82,7 +95,4 @@ services:
     - "3200:3200"
     - "4317:4317"
 
-  # load-tester:
-  #   environment:
-  #     - GRPC_SERVER_URL=http://command-service-stream:7001
 

@@ -10,7 +10,7 @@ using Serilog.Enrichers.Span;
 var builder = WebApplication.CreateBuilder(args);
 
 var loggingConfig = builder.Configuration.GetSection("Logging");
-var applicationName = loggingConfig.GetValue<string>("Loki:ApplicationName") ?? "UnknownService";
+var applicationName = loggingConfig.GetValue<string>("Loki:ApplicationName") ?? "command-service";
 
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracerProviderBuilder =>
@@ -22,7 +22,7 @@ builder.Services.AddOpenTelemetry()
             .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(applicationName))
             .AddOtlpExporter(options =>
             {
-                options.Endpoint = new Uri(builder.Configuration["Tempo:OtlpEndpoint"] 
+                options.Endpoint = new Uri(loggingConfig.GetValue<string>("Tempo:OtlpEndpoint")
                     ?? throw new ArgumentNullException("OtlpEndpoint"));
             });
     });

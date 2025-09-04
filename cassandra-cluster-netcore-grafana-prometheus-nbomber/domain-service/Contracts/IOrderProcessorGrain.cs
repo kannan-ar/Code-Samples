@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace DomainService.Contracts;
+﻿namespace DomainService.Contracts;
 
 [Alias("DomainService.Contracts.IOrderProcessorGrain")]
 public interface IOrderProcessorGrain : IGrainWithStringKey

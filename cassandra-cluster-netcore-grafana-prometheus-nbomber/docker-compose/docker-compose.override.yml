@@ -69,12 +69,12 @@ services:
 
   # cassandra-web:
   #   ports:
-  #     - "3001:3000"
+  #     - "8080:8090"
   #   environment:
   #     - CASSANDRA_HOST=cassandra-1
   #     - CASSANDRA_PORT=9042
-  #     - CASSANDRA_USER=admin
-  #     - CASSANDRA_PASSWORD=admin
+  #     - CASSANDRA_USERNAME=cassandra
+  #     - CASSANDRA_PASSWORD=cassandra
 
   prometheus:
     ports:

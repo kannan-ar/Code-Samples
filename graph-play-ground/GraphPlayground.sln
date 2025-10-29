@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "App.csproj", "{610344D8-3DE2-4827-9F96-5CF0A5C3BAD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neodash-setup", "neodash-setup", "{C027BAFB-A703-437F-98FF-3F7C8B2B2696}"
+	ProjectSection(SolutionItems) = preProject
+		neodash-setup\map-dashboard.json = neodash-setup\map-dashboard.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{610344D8-3DE2-4827-9F96-5CF0A5C3BAD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{610344D8-3DE2-4827-9F96-5CF0A5C3BAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{610344D8-3DE2-4827-9F96-5CF0A5C3BAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{610344D8-3DE2-4827-9F96-5CF0A5C3BAD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5786C4E9-19EF-4A0C-88A7-657A2D74AF1F}
+	EndGlobalSection
+EndGlobal

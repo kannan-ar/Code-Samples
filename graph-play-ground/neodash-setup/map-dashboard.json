@@ -1,0 +1,36 @@
+{
+  "version": "1.2.0",
+  "title": "Warehouse-Customer Proximity Map",
+  "description": "Map showing all customers and warehouses with their nearest warehouse connections.",
+  "settings": {
+    "theme": "light"
+  },
+  "pages": [
+    {
+      "title": "Warehouse Map",
+      "widgets": [
+        {
+          "id": "map1",
+          "type": "map",
+          "title": "Customers and Warehouses",
+          "query": "MATCH (c:Customer)-[r:CLOSEST_TO]->(w:Warehouse)\nRETURN c.location AS source, w.location AS target, r.distance_km AS distance, c.name AS customer, w.name AS warehouse",
+          "mapTileProvider": "CartoDB.Voyager",
+          "latitudeField": "source.latitude",
+          "longitudeField": "source.longitude",
+          "lineLatitudeField": "target.latitude",
+          "lineLongitudeField": "target.longitude",
+          "titleField": "customer",
+          "subtitleField": "warehouse",
+          "sizeField": "distance",
+          "colorScheme": "Category10",
+          "settings": {
+            "showLines": true,
+            "showPoints": true,
+            "pointSize": 10,
+            "showTitles": true
+          }
+        }
+      ]
+    }
+  ]
+}

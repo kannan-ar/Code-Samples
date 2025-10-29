@@ -2,12 +2,14 @@
 using DomainService.Contracts;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
+using Orleans.Concurrency;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text;
 
 namespace DomainService.Infrastructure.Kafka;
 
+[Reentrant]
 public class KafkaPartitionAwareConsumerService : BackgroundService
 {
     private readonly ILogger<KafkaPartitionAwareConsumerService> _logger;
@@ -100,14 +102,14 @@ public class KafkaPartitionAwareConsumerService : BackgroundService
 
             if (_partitionTasks.TryRemove(tp, out var task))
             {
-                _ = task.ContinueWith(t =>
-                {
-                    if (t.IsFaulted)
-                        _logger.LogError(t.Exception, "Partition consumer task faulted after removal.");
-                }, TaskContinuationOptions.OnlyOnFaulted);
+                    _ = task.ContinueWith(t =>
+                    {
+                        if (t.IsFaulted)
+                            _logger.LogError(t.Exception, "Partition task faulted after timeout.");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
             }
-        }
-    }
+                }
 
     private async Task StartPartitionConsumer(TopicPartition partition, CancellationToken cancellationToken)
     {

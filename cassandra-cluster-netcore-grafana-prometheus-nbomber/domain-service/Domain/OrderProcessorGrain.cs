@@ -15,7 +15,7 @@ public class OrderProcessorGrain(ILogger<OrderProcessorGrain> logger) : Grain, I
 
     private List<string> _batchBuffer;
     private readonly int _batchSize = 50;
-    private readonly TimeSpan _flushInterval = TimeSpan.FromSeconds(5);
+    private readonly TimeSpan _flushInterval = TimeSpan.FromSeconds(1);
 
     private GrainCancellationTokenSource _cts;
 

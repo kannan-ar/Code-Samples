@@ -1,0 +1,12 @@
+bin/
+obj/
+.vs/
+.vscode/.ropeproject/
+.dotnet_home/
+.appdata/
+.docker/
+.nuget/
+**/bin/
+**/obj/
+*.user
+*.suo

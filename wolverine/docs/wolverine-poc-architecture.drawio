@@ -1,0 +1,189 @@
+<mxfile host="app.diagrams.net" modified="2026-04-27T17:20:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="wolverine-poc-architecture" name="Wolverine POC Architecture">
+    <mxGraphModel dx="1780" dy="1120" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Wolverine POC - Order Processing Architecture" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#172033;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="360" y="20" width="880" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client-zone" value="Client / Operator" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#F7F8FA;strokeColor=#7B8794;fontColor=#172033;fontStyle=1;startSize=34;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="230" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="app-zone" value=".NET API Container / Process" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#F2F7FF;strokeColor=#2F80ED;fontColor=#172033;fontStyle=1;startSize=34;" vertex="1" parent="1">
+          <mxGeometry x="310" y="90" width="600" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-zone" value="Docker Compose Infrastructure" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#F7FBF5;strokeColor=#4C9A2A;fontColor=#172033;fontStyle=1;startSize=34;" vertex="1" parent="1">
+          <mxGeometry x="960" y="90" width="590" height="760" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client" value="HTTP Client&#xa;curl / browser / test tool" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7B8794;fontColor=#172033;" vertex="1" parent="client-zone">
+          <mxGeometry x="30" y="60" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="operator" value="Operator&#xa;Seq, Kafka UI, pgAdmin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7B8794;fontColor=#172033;" vertex="1" parent="client-zone">
+          <mxGeometry x="30" y="170" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="minimal-api" value="ASP.NET Core Minimal API&#xa;POST /orders&#xa;GET /orders/{id}&#xa;/health /metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;fontStyle=1;" vertex="1" parent="app-zone">
+          <mxGeometry x="35" y="55" width="220" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="correlation" value="Correlation + Request Logging Middleware&#xa;X-Correlation-Id&#xa;Serilog request completion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="app-zone">
+          <mxGeometry x="310" y="55" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="mediator" value="Wolverine IMessageBus&#xa;In-process mediator&#xa;InvokeAsync command/query dispatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDEBFF;strokeColor=#2F80ED;fontColor=#172033;fontStyle=1;" vertex="1" parent="app-zone">
+          <mxGeometry x="185" y="210" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="create-slice" value="Vertical Slice&#xa;CreateOrder&#xa;Validate request&#xa;Create Pending order&#xa;Publish OrderCreated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="app-zone">
+          <mxGeometry x="35" y="350" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="get-slice" value="Vertical Slice&#xa;GetOrder&#xa;Read-only EF projection&#xa;Returns order details" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="app-zone">
+          <mxGeometry x="330" y="350" width="220" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="transaction" value="Wolverine EF Transaction Middleware&#xa;[Transactional] handlers&#xa;SaveChangesAsync after success&#xa;Atomic domain + outbox commit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDEBFF;strokeColor=#2F80ED;fontColor=#172033;fontStyle=1;" vertex="1" parent="app-zone">
+          <mxGeometry x="175" y="515" width="250" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="consumer" value="Kafka Consumer Handler&#xa;OrderCreatedHandler&#xa;Load order by OrderId&#xa;Set Status = Confirmed&#xa;Skip if already Confirmed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="app-zone">
+          <mxGeometry x="35" y="680" width="245" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics" value="AppMetrics&#xa;requests/sec&#xa;create latency&#xa;handler duration&#xa;failed messages" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="app-zone">
+          <mxGeometry x="345" y="690" width="205" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="postgres" value="PostgreSQL&#xa;Database: wolverine_poc" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#4C9A2A;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="50" y="70" width="200" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="orders-table" value="orders.orders&#xa;Order aggregate table&#xa;Pending / Confirmed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF7EA;strokeColor=#4C9A2A;fontColor=#172033;" vertex="1" parent="infra-zone">
+          <mxGeometry x="55" y="205" width="190" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="outbox" value="wolverine schema&#xa;Durable Outbox&#xa;Outgoing envelopes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF6D8;strokeColor=#B7791F;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="55" y="330" width="190" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="inbox" value="wolverine schema&#xa;Durable Inbox&#xa;Incoming envelopes&#xa;Idempotency tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF6D8;strokeColor=#B7791F;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="55" y="455" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="error-storage" value="Wolverine Error Storage&#xa;failed envelopes after retries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDED;strokeColor=#C53030;fontColor=#172033;" vertex="1" parent="infra-zone">
+          <mxGeometry x="55" y="605" width="190" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="kafka" value="Kafka Broker&#xa;localhost:9092" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4C9A2A;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="95" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="topic" value="Topic&#xa;orders.created" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#EAF7FF;strokeColor=#087EA4;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="235" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dlq" value="Dead Letter Topic&#xa;orders.dead-letter" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFEDED;strokeColor=#C53030;fontColor=#172033;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="370" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="zookeeper" value="Zookeeper&#xa;Kafka coordination" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF7EA;strokeColor=#4C9A2A;fontColor=#172033;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="505" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="seq" value="Seq&#xa;Structured logs&#xa;http://localhost:5341" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4EDFF;strokeColor=#805AD5;fontColor=#172033;fontStyle=1;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="630" width="190" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="ui" value="Infrastructure UIs&#xa;Kafka UI: 8080&#xa;pgAdmin: 5050" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7B8794;fontColor=#172033;" vertex="1" parent="infra-zone">
+          <mxGeometry x="330" y="735" width="190" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" value="Legend" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#7B8794;fontColor=#172033;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="900" width="1510" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-http" value="HTTP request/response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2F80ED;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="35" y="55" width="190" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-db" value="Database transaction / EF Core" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF7EA;strokeColor=#4C9A2A;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="265" y="55" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-msg" value="Durable messaging / outbox / inbox" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF6D8;strokeColor=#B7791F;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="525" y="55" width="245" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-kafka" value="Kafka topic / asynchronous flow" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#EAF7FF;strokeColor=#087EA4;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="815" y="42" width="225" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-log" value="Logging / observability" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4EDFF;strokeColor=#805AD5;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="1090" y="55" width="205" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-fail" value="Retry / error / DLQ path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDED;strokeColor=#C53030;fontColor=#172033;" vertex="1" parent="legend">
+          <mxGeometry x="1330" y="55" width="150" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge-client-api" value="POST /orders&#xa;GET /orders/{id}" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="client" target="minimal-api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-api-correlation" value="request scope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="minimal-api" target="correlation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-api-mediator" value="InvokeAsync" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="minimal-api" target="mediator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-mediator-create" value="CreateOrderCommand" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="mediator" target="create-slice">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-mediator-get" value="GetOrderQuery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="mediator" target="get-slice">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-create-transaction" value="[Transactional]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2F80ED;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="create-slice" target="transaction">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-get-orders" value="read projection" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="get-slice" target="orders-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-transaction-orders" value="insert order / update status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="transaction" target="orders-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-transaction-outbox" value="store outgoing envelope&#xa;same DB transaction" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B7791F;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="transaction" target="outbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-outbox-topic" value="async publish&#xa;OrderCreated" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#087EA4;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="outbox" target="topic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-kafka-topic" value="hosted by broker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#087EA4;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="kafka" target="topic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-topic-consumer" value="consume OrderCreated" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#087EA4;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="topic" target="consumer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-topic-inbox" value="record incoming envelope&#xa;durable inbox" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B7791F;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="topic" target="inbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-inbox-consumer" value="idempotent dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B7791F;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="inbox" target="consumer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-consumer-transaction" value="[Transactional] save Confirmed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="consumer" target="transaction">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-fail-error" value="after retries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C53030;fontColor=#172033;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="consumer" target="error-storage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-fail-dlq" value="native DLQ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C53030;fontColor=#172033;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="consumer" target="dlq">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-zk-kafka" value="coordination" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="zookeeper" target="kafka">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-api-seq" value="structured logs&#xa;CorrelationId / OrderId / MessageId" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#805AD5;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="correlation" target="seq">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-metrics" value="latency + counters" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#805AD5;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="minimal-api" target="metrics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-operator-seq" value="view logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#805AD5;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="operator" target="seq">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-operator-ui" value="inspect infra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7B8794;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="operator" target="ui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postgres-orders" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="postgres" target="orders-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postgres-outbox" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="postgres" target="outbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postgres-inbox" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4C9A2A;fontColor=#172033;endArrow=block;endFill=1;" edge="1" parent="1" source="postgres" target="inbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

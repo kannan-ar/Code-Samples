@@ -1,0 +1,12 @@
+services:
+  wolverinepoc-api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=wolverine_poc;Username=wolverine;Password=wolverine;Pooling=true;Minimum Pool Size=1;Maximum Pool Size=50"
+      Kafka__BootstrapServers: kafka:29092
+      Kafka__OrdersCreatedTopic: orders.created
+      Kafka__ConsumerGroup: wolverine-poc-orders-docker
+      Serilog__WriteTo__1__Args__serverUrl: http://seq
+    ports:
+      - "5012:8080"

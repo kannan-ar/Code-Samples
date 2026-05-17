@@ -33,7 +33,7 @@ services:
     environment:
       KAFKA_BROKERS: "kafka-1:9092"
     ports:
-      - "8080:8080"
+      - "8088:8080"
 
   zookeeper:
     environment:
